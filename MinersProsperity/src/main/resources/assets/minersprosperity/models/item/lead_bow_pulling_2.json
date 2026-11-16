@@ -1,6 +1,0 @@
-{
-  "parent": "minersprosperity:item/lead_bow_standby",
-  "textures": {
-    "layer0": "minersprosperity:items/lead_bow_pulling_2"
-  }
-}

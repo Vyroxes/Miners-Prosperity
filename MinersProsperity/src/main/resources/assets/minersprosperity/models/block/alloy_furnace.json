@@ -1,9 +1,0 @@
-{
-	"parent": "minersprosperity:block/machine",
-	"textures":
-	{
-		"up": "minersprosperity:blocks/alloy_furnace_top",
-		"front": "#front",
-		"side": "minersprosperity:blocks/alloy_furnace_side"
-	}
-}

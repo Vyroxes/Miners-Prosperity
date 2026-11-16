@@ -1,3 +1,0 @@
-minecraft {
-    injectedTags.put('MODGROUP', modGroup)
-}
