@@ -1,0 +1,33 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "ICI",
+    "BFB",
+    "RMR"
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    },
+    "C": {
+      "item": "minersprosperity:copper_coil"
+    },
+    "B": {
+      "item": "minecraft:brick"
+    },
+    "F": {
+      "item": "minecraft:furnace"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "M": {
+      "item": "minersprosperity:basic_machine_frame"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:solid_fuel_generator",
+    "count": 1
+  }
+}

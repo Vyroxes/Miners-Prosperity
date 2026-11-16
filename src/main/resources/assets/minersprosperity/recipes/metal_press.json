@@ -1,0 +1,30 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "IPI",
+    "BFC",
+    "IPI"
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    },
+    "B": {
+      "item": "minersprosperity:basic_circuit_board"
+    },
+    "F": {
+      "item": "minersprosperity:basic_machine_frame"
+    },
+    "C": {
+      "item": "minersprosperity:copper_coil"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:metal_press",
+    "count": 1
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=south": {"model": "minersprosperity:worktable"},
+    "facing=west": {"model": "minersprosperity:worktable", "y": 90},
+    "facing=north": {"model": "minersprosperity:worktable", "y": 180},
+    "facing=east": {"model": "minersprosperity:worktable", "y": 270}
+  }
+}

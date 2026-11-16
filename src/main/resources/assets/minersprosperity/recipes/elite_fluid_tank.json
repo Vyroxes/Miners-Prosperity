@@ -1,0 +1,27 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "PGP",
+    "GFG",
+    "PRP"
+  ],
+  "key": {
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plateTitanium"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "F": {
+      "item": "minersprosperity:elite_machine_frame"
+    },
+    "R": {
+      "item": "minersprosperity:rubber"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:elite_fluid_tank",
+    "count": 1
+  }
+}

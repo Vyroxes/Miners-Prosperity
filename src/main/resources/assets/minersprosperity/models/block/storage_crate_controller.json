@@ -1,0 +1,9 @@
+{
+  "parent": "minersprosperity:block/machine",
+  "textures": {
+    "front": "#front",
+    "side": "minersprosperity:blocks/storage_crate_controller_side",
+    "up": "minersprosperity:blocks/storage_crate_controller_top",
+    "down": "minersprosperity:blocks/storage_crate_controller_side"
+  }
+}

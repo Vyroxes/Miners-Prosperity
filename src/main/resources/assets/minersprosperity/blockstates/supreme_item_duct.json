@@ -1,0 +1,9 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "minersprosperity:supreme_item_duct_dynamic"
+      }
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "PGP",
+    "GFG",
+    "PRP"
+  ],
+  "key": {
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plateSteel"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "F": {
+      "item": "minersprosperity:improved_machine_frame"
+    },
+    "R": {
+      "item": "minersprosperity:rubber"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:improved_fluid_tank",
+    "count": 1
+  }
+}

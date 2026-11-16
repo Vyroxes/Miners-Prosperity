@@ -1,0 +1,28 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "RPR",
+    "SCS",
+    "RPR"
+  ],
+  "key": {
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "ingotElectrum"
+    },
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "gemDiamond"
+    },
+    "S": {
+      "item": "minersprosperity:silicon"
+    },
+    "C": {
+      "item": "minersprosperity:improved_circuit_board"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:advanced_circuit_board",
+    "count": 1
+  }
+}

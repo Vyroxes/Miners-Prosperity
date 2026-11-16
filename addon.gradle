@@ -1,0 +1,8 @@
+minecraft {
+    injectedTags.put('MODGROUP', modGroup)
+}
+
+// Inventory Tweaks 1.63 stores its AT outside META-INF without an FMLAT manifest entry.
+// Apply it explicitly to development Minecraft; it is not bundled with our mod.
+tasks.deobfuscateMergedJarToSrg.accessTransformerFiles.from('libs/invtweaks_at.cfg')
+tasks.srgifyBinpatchedJar.accessTransformerFiles.from('libs/invtweaks_at.cfg')

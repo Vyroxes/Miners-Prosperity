@@ -1,0 +1,31 @@
+{
+  "package": "net.vyroxes.minersprosperity.mixin",
+  "refmap": "mixins.minersprosperity.refmap.json",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "accessor.ChunkGeneratorFlatAccessor",
+    "MixinBlockChest",
+    "MixinBlockEnderChest",
+    "MixinBlockShulkerBox",
+    "MixinContainer",
+    "MixinContainerWorkbench",
+    "MixinEntityLivingBase",
+    "MixinEntityPlayerExtension",
+    "MixinItemBow",
+    "MixinItemFishingRod",
+    "MixinItemFlintAndSteel",
+    "MixinItemShears",
+    "MixinNetHandlerPlayServer",
+    "MixinWorld"
+  ],
+  "client": [
+    "MixinClientRegistry",
+    "MixinEntityRenderer",
+    "MixinGuiUtilsTooltip",
+    "MixinItemRenderer",
+    "MixinVanillaResourceOverrides"
+  ],
+  "server": []
+}

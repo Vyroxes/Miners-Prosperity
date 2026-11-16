@@ -1,0 +1,29 @@
+package net.vyroxes.minersprosperity.proxy;
+
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.vyroxes.minersprosperity.tile.TileEntityMachine;
+
+public class CommonProxy
+{
+    public void preInit(FMLPreInitializationEvent event)
+    {
+    }
+
+    public void init(FMLInitializationEvent event)
+    {
+    }
+
+    public void postInit(FMLPostInitializationEvent event)
+    {
+    }
+
+    public void showItemSearchResults(int dimension, net.minecraft.util.math.BlockPos[] positions)
+    {
+    }
+
+    public void updateMachineSound(TileEntityMachine tileEntity)
+    {
+    }
+}

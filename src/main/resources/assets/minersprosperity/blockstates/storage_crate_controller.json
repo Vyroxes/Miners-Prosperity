@@ -1,0 +1,43 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "facing": {
+      "east": {
+        "y": 90
+      },
+      "south": {
+        "y": 180
+      },
+      "west": {
+        "y": 270
+      },
+      "north": {}
+    },
+    "state": {
+      "powered": {
+        "textures": {
+          "front": "minersprosperity:blocks/storage_crate_controller_front_on"
+        }
+      },
+      "off": {
+        "textures": {
+          "front": "minersprosperity:blocks/storage_crate_controller_front_off"
+        }
+      },
+      "active": {
+        "textures": {
+          "front": "minersprosperity:blocks/storage_crate_controller_front_on"
+        }
+      }
+    },
+    "inventory": [
+      {}
+    ]
+  },
+  "defaults": {
+    "textures": {
+      "front": "minersprosperity:blocks/storage_crate_controller_front_off"
+    },
+    "model": "minersprosperity:storage_crate_controller"
+  }
+}

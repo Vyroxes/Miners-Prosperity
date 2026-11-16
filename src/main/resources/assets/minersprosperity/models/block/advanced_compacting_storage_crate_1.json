@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "minersprosperity:blocks/storage_crate_side",
+    "down": "minersprosperity:blocks/storage_crate_side",
+    "up": "minersprosperity:blocks/storage_crate_side",
+    "north": "minersprosperity:blocks/advanced_storage_crate_front",
+    "south": "minersprosperity:blocks/storage_crate_side",
+    "west": "minersprosperity:blocks/storage_crate_side",
+    "east": "minersprosperity:blocks/storage_crate_side"
+  }
+}

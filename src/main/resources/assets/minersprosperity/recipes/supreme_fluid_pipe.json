@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CFC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "minersprosperity:ultimate_fluid_pipe"
+    },
+    "F": {
+      "item": "minersprosperity:supreme_machine_frame"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:supreme_fluid_pipe",
+    "count": 8
+  }
+}

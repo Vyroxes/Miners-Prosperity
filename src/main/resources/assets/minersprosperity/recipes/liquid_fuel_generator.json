@@ -1,0 +1,33 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "SGS",
+    "PFP",
+    "CBC"
+  ],
+  "key": {
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "plateSteel"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "P": {
+      "item": "minersprosperity:pump_component"
+    },
+    "F": {
+      "item": "minersprosperity:improved_machine_frame"
+    },
+    "C": {
+      "item": "minersprosperity:copper_coil"
+    },
+    "B": {
+      "item": "minersprosperity:improved_circuit_board"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:liquid_fuel_generator",
+    "count": 1
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "RCR",
+    "GSG",
+    "RCR"
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "C": {
+      "type": "forge:ore_dict",
+      "ore": "ingotCopper"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "nuggetGold"
+    },
+    "S": {
+      "item": "minecraft:glass"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:basic_circuit_board",
+    "count": 2
+  }
+}

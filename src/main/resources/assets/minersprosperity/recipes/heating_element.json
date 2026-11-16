@@ -1,0 +1,25 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "CIC",
+    "BIB",
+    " I "
+  ],
+  "key": {
+    "C": {
+      "type": "forge:ore_dict",
+      "ore": "ingotCopper"
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "rodIron"
+    },
+    "B": {
+      "item": "minecraft:brick"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:heating_element",
+    "count": 1
+  }
+}

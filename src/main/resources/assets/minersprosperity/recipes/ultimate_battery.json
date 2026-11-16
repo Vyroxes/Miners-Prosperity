@@ -1,0 +1,28 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "PRP",
+    "LCL",
+    "PRP"
+  ],
+  "key": {
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plateIridium"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "L": {
+      "type": "forge:ore_dict",
+      "ore": "ingotPlatinum"
+    },
+    "C": {
+      "item": "minersprosperity:ultimate_circuit_board"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:ultimate_battery",
+    "count": 1
+  }
+}

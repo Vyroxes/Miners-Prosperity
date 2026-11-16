@@ -1,0 +1,28 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " C ",
+    "GMG",
+    " R "
+  ],
+  "key": {
+    "C": {
+      "item": "minersprosperity:basic_circuit_board"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "gearIron"
+    },
+    "M": {
+      "item": "minersprosperity:electric_motor"
+    },
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "rodIron"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:servo",
+    "count": 1
+  }
+}

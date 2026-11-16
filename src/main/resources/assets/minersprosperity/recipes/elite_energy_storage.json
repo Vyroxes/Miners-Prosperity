@@ -1,0 +1,30 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "PCP",
+    "RFR",
+    "PBP"
+  ],
+  "key": {
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plateTitanium"
+    },
+    "C": {
+      "item": "minersprosperity:copper_coil"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    },
+    "F": {
+      "item": "minersprosperity:elite_machine_frame"
+    },
+    "B": {
+      "item": "minersprosperity:elite_circuit_board"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:elite_energy_storage",
+    "count": 1
+  }
+}

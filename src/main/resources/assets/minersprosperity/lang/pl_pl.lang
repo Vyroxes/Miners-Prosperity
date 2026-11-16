@@ -1,0 +1,385 @@
+#MACHINE UPGRADES
+item.range_upgrade.name=Ulepszenie zasięgu
+
+#UPGRADE DESCRIPTIONS
+item.range_upgrade.tooltip=Zwiększa obszar pracy obsługiwanych maszyn.
+item.range_upgrade.tooltip.1=Wymaga maszyny obsługującej ulepszenie zasięgu.
+item.range_upgrade.tooltip.2=Obecne maszyny przetwarzające i generatory nie używają tego ulepszenia.
+
+#MACHINE COMPONENTS
+item.copper_coil.name=Cewka miedziana
+item.electric_motor.name=Silnik elektryczny
+item.servo.name=Serwomechanizm
+item.pump_component.name=Moduł pompy
+item.heating_element.name=Element grzejny
+item.crushing_head.name=Głowica krusząca
+item.filter_mesh.name=Siatka filtracyjna
+
+#GEMS
+item.garnet.name=Granat
+item.malachite.name=Malachit
+item.amber.name=Bursztyn
+item.tanzanite.name=Tanzanit
+
+#DUSTS
+item.garnet_dust.name=Pył granatu
+item.malachite_dust.name=Pył malachitu
+item.amber_dust.name=Pył bursztynu
+item.tanzanite_dust.name=Pył tanzanitu
+item.magnesium_dust.name=Pył magnezu
+item.molybdenum_dust.name=Pył molibdenu
+item.vanadium_dust.name=Pył wanadu
+item.lithium_dust.name=Pył litu
+item.manganese_dust.name=Pył manganu
+item.boron_dust.name=Pył boru
+item.zirconium_dust.name=Pył cyrkonu
+item.thorium_dust.name=Pył toru
+item.beryllium_dust.name=Pył berylu
+item.obsidian_dust.name=Pył obsydianu
+item.glass_dust.name=Pył szkła
+
+#TINY DUSTS
+item.garnet_tiny_dust.name=Mała kupka pyłu granatu
+item.malachite_tiny_dust.name=Mała kupka pyłu malachitu
+item.amber_tiny_dust.name=Mała kupka pyłu bursztynu
+item.tanzanite_tiny_dust.name=Mała kupka pyłu tanzanitu
+item.magnesium_tiny_dust.name=Mała kupka pyłu magnezu
+item.molybdenum_tiny_dust.name=Mała kupka pyłu molibdenu
+item.vanadium_tiny_dust.name=Mała kupka pyłu wanadu
+item.lithium_tiny_dust.name=Mała kupka pyłu litu
+item.manganese_tiny_dust.name=Mała kupka pyłu manganu
+item.boron_tiny_dust.name=Mała kupka pyłu boru
+item.zirconium_tiny_dust.name=Mała kupka pyłu cyrkonu
+item.thorium_tiny_dust.name=Mała kupka pyłu toru
+item.beryllium_tiny_dust.name=Mała kupka pyłu berylu
+item.obsidian_tiny_dust.name=Mała kupka pyłu obsydianu
+item.glass_tiny_dust.name=Mała kupka pyłu szkła
+
+#BLOCKS
+tile.worktable.name=Stół warsztatowy
+tile.trash_can.name=Kosz na śmieci
+
+#MACHINES
+tile.crystallizer.name=Krystalizator
+tile.grinder.name=Młynek
+tile.rock_crusher.name=Kruszarka skał
+tile.solid_fuel_generator.name=Generator na paliwo stałe
+
+#CONDUITS
+tile.redstone_conduit.name=Przewód redstone
+
+#STORAGE CRATES
+tile.basic_storage_crate.name=Basic — skrzynia magazynowa (1)
+tile.basic_storage_crate_2.name=Basic — skrzynia magazynowa (2)
+tile.basic_storage_crate_4.name=Basic — skrzynia magazynowa (4)
+tile.basic_compacting_storage_crate.name=Basic — skrzynia kompresująca
+tile.improved_storage_crate.name=Improved — skrzynia magazynowa (1)
+tile.improved_storage_crate_2.name=Improved — skrzynia magazynowa (2)
+tile.improved_storage_crate_4.name=Improved — skrzynia magazynowa (4)
+tile.improved_compacting_storage_crate.name=Improved — skrzynia kompresująca
+tile.advanced_storage_crate.name=Advanced — skrzynia magazynowa (1)
+tile.advanced_storage_crate_2.name=Advanced — skrzynia magazynowa (2)
+tile.advanced_storage_crate_4.name=Advanced — skrzynia magazynowa (4)
+tile.advanced_compacting_storage_crate.name=Advanced — skrzynia kompresująca
+tile.elite_storage_crate.name=Elite — skrzynia magazynowa (1)
+tile.elite_storage_crate_2.name=Elite — skrzynia magazynowa (2)
+tile.elite_storage_crate_4.name=Elite — skrzynia magazynowa (4)
+tile.elite_compacting_storage_crate.name=Elite — skrzynia kompresująca
+tile.ultimate_storage_crate.name=Ultimate — skrzynia magazynowa (1)
+tile.ultimate_storage_crate_2.name=Ultimate — skrzynia magazynowa (2)
+tile.ultimate_storage_crate_4.name=Ultimate — skrzynia magazynowa (4)
+tile.ultimate_compacting_storage_crate.name=Ultimate — skrzynia kompresująca
+tile.supreme_storage_crate.name=Supreme — skrzynia magazynowa (1)
+tile.supreme_storage_crate_2.name=Supreme — skrzynia magazynowa (2)
+tile.supreme_storage_crate_4.name=Supreme — skrzynia magazynowa (4)
+tile.supreme_compacting_storage_crate.name=Supreme — skrzynia kompresująca
+tile.creative_storage_crate.name=Creative — skrzynia magazynowa (1)
+tile.creative_storage_crate_2.name=Creative — skrzynia magazynowa (2)
+tile.creative_storage_crate_4.name=Creative — skrzynia magazynowa (4)
+tile.creative_compacting_storage_crate.name=Creative — skrzynia kompresująca
+tile.storage_crate_controller.name=Kontroler skrzyń magazynowych
+
+#CONTAINERS
+container.crystallizer=Krystalizator
+container.grinder=Młynek
+container.rock_crusher=Kruszarka skał
+container.trash_can=Kosz na śmieci
+container.solid_fuel_generator=Generator na paliwo stałe
+container.storage_crate=Skrzynia magazynowa
+container.compacting_storage_crate=Skrzynia kompresująca
+
+#GUI
+gui.trash_can.warning=Uwaga: usuwa bezpowrotnie!
+gui.trash_can.medium_0=Przedmioty
+gui.trash_can.medium_1=Energia
+gui.trash_can.medium_2=Płyny
+gui.trash_can.mode_0=Wyłączone
+gui.trash_can.mode_1=Włączone
+gui.trash_can.mode_2=Opróżnianie pojemników
+gui.trash_can.container_help=Opróżnianie pojemników zachowuje wiadra, tanki i baterie.
+
+gui.fluid_transfer_limits=Napełnianie: %s / Opróżnianie: %s
+gui.solid_fuel_generator.burn_time=Czas spalania: %.1f s
+
+#BACKPACK GUI
+gui.shift_left_click=Shift + LPM
+gui.shift_left_click_desc= pustą ręką wyłącz wejście i wyjście wszystkich slotów ze wszystkich stron.
+gui.shift_right_click=Shift + PPM
+gui.shift_right_click_desc= pustą ręką wyłącz wejście i wyjście wszystkich slotów po klikniętej stronie.
+
+gui.backpack.text_filters.fluid_hint=Dokładne nazwy płynów (maks. 32 x 64).
+gui.backpack.text_filters.Fluid=Filtry nazw płynów
+gui.backpack.text_filters.edit=§fPPM:§7 edytuj filtry tekstowe (%s).
+gui.backpack.text_filters.OreDict=Filtry Ore Dictionary
+gui.backpack.text_filters.ModID=Filtry Mod ID
+gui.backpack.text_filters.add=Dodaj
+gui.backpack.text_filters.ore_hint=OreDict obsługuje * (maks. 32 x 64).
+gui.backpack.text_filters.mod_hint=Dokładne Mod ID (maks. 32 x 64).
+gui.backpack.text_filters.invalid=Błędny wpis lub przekroczony limit listy.
+gui.backpack.configuration.pick_up=§7Podnieś plecak, aby zmienić jego konfigurację.
+gui.backpack.damage.off=Ignoruj uszkodzenie
+gui.backpack.damage.on=Uwzględniaj uszkodzenie
+gui.backpack.help.Collect=Automatycznie zbiera pasujące przedmioty do plecaka.
+gui.backpack.help.Compression=Automatycznie kompresuje przedmioty.\n§fShift + LPM:§7 zmień wymóg odwracalności.
+gui.backpack.help.CompressionKeep=Zapas dla każdego dokładnego typu przedmiotu, z uwzględnieniem zablokowanych slotów.
+gui.backpack.help.Damage=
+gui.backpack.help.Deposit=Uderz w kontener, aby odłożyć przedmioty.\n§fShift + LPM:§7 zmień zapas.
+gui.backpack.help.LockEdit=Przejdź do zawartości i klikaj sloty, aby zmieniać blokady. Wyłącz edycję, aby ręcznie przenosić przedmioty.
+gui.backpack.help.Metadata=
+gui.backpack.help.ModID=Dopasowuje identyfikatory modów przedmiotów w filtrach.\n§fLPM:§7 zmień dopasowanie według przedmiotów.
+gui.backpack.help.NBT=
+gui.backpack.help.OreDict=Dopasowuje wpisy Ore Dictionary przedmiotów w filtrach.\n§fLPM:§7 zmień dopasowanie według przedmiotów.
+gui.backpack.help.Void=Usuwa przedmioty dopuszczone przez filtr.\n§fShift + LPM:§7 zmień zapas.
+gui.backpack.help.WhitelistOrBlacklist=
+gui.backpack.metadata.off=Ignoruj metadane
+gui.backpack.metadata.on=Uwzględniaj metadane
+gui.backpack.modid.off=Ignoruj ModID
+gui.backpack.modid.on=Uwzględniaj ModID
+gui.backpack.nbt.off=Ignoruj NBT
+gui.backpack.nbt.on=Uwzględniaj NBT
+gui.backpack.option.Collect=Automatyczne zbieranie
+gui.backpack.option.Compression=Automatyczna kompresja
+gui.backpack.option.CompressionKeep=Zapas kompresji
+gui.backpack.option.Damage=Uszkodzenie
+gui.backpack.option.Deposit=Szybkie odkładanie
+gui.backpack.option.DepositKeep=Zapas
+gui.backpack.option.LockEdit=Edycja blokad slotów
+gui.backpack.option.Metadata=Metadane
+gui.backpack.option.ModID=ID moda
+gui.backpack.option.NBT=NBT
+gui.backpack.option.OreDict=Ore Dictionary
+gui.backpack.option.Reversible=Tylko odwracalne receptury
+gui.backpack.option.Void=Usuwanie
+gui.backpack.option.VoidKeep=Zapas
+gui.backpack.option.WhitelistOrBlacklist=Filtr
+gui.backpack.ore_dict.off=Ignoruj OreDict
+gui.backpack.ore_dict.on=Uwzględniaj OreDict
+gui.backpack.tooltip.help=§7%s
+gui.backpack.tooltip.setting=%s: %s
+gui.backpack.tooltip.title=§f%s
+gui.backpack.value.Collect.0=Wyłączone
+gui.backpack.value.Collect.1=Tylko istniejące przedmioty
+gui.backpack.value.Collect.2=Wszystkie przedmioty
+gui.backpack.value.Compression.0=Wyłączone
+gui.backpack.value.Compression.1=2x2
+gui.backpack.value.Compression.2=3x3
+gui.backpack.value.Compression.3=Oba
+gui.backpack.value.CompressionKeep.0=Bez zapasu
+gui.backpack.value.CompressionKeep.1=Zachowaj 1 sztukę
+gui.backpack.value.CompressionKeep.2=Zachowaj 1 stos
+gui.backpack.value.Damage.0=Wyłączone
+gui.backpack.value.Damage.1=Włączone
+gui.backpack.value.Deposit.0=Wyłączone
+gui.backpack.value.Deposit.1=Tylko istniejące przedmioty
+gui.backpack.value.Deposit.2=Wszystkie przedmioty
+gui.backpack.value.DepositKeep.0=Bez zapasu
+gui.backpack.value.DepositKeep.1=Zachowaj 1 sztukę
+gui.backpack.value.DepositKeep.2=Zachowaj 1 stos
+gui.backpack.value.LockEdit.0=Wyłączone
+gui.backpack.value.LockEdit.1=Włączone
+gui.backpack.value.Metadata.0=Wyłączone
+gui.backpack.value.Metadata.1=Włączone
+gui.backpack.value.ModID.0=Wyłączone
+gui.backpack.value.ModID.1=Włączone
+gui.backpack.value.NBT.0=Wyłączone
+gui.backpack.value.NBT.1=Włączone
+gui.backpack.value.OreDict.0=Wyłączone
+gui.backpack.value.OreDict.1=Włączone
+gui.backpack.value.Reversible.0=Wyłączone
+gui.backpack.value.Reversible.1=Włączone
+gui.backpack.value.Void.0=Wyłączone
+gui.backpack.value.Void.1=Gdy pełny
+gui.backpack.value.Void.2=Zawsze
+gui.backpack.value.VoidKeep.0=Bez zapasu
+gui.backpack.value.VoidKeep.1=Zachowaj 1 sztukę
+gui.backpack.value.VoidKeep.2=Zachowaj 1 stos
+gui.backpack.value.WhitelistOrBlacklist.0=Czarna lista
+gui.backpack.value.WhitelistOrBlacklist.1=Biała lista
+gui.backpack.whitelist_or_blacklist.off=Czarna lista
+gui.backpack.whitelist_or_blacklist.on=Biała lista
+
+#STORAGE CRATE GUI
+gui.crate.amount=%s / %s sztuk
+gui.crate.compartment=Komora %s
+gui.crate.face.0=Dół
+gui.crate.face.1=Góra
+gui.crate.face.2=Północ
+gui.crate.face.3=Południe
+gui.crate.face.4=Zachód
+gui.crate.face.5=Wschód
+gui.crate.inventory=Ekwipunek
+gui.crate.lock=Komora %s: %s. Blokada zachowuje przypisany item po opróżnieniu.
+gui.crate.lock_edit=Edycja blokad slotów: %s
+gui.crate.locked=Przypisanie zablokowane
+gui.crate.port.0=Wyłączona
+gui.crate.port.1=Wejście
+gui.crate.port.2=Wyjście
+gui.crate.port.3=Wejście / wyjście
+gui.crate.redstone.0=Redstone: wyłączony
+gui.crate.redstone.1=Redstone: dowolna komora pełna
+gui.crate.redstone.2=Redstone: wszystkie komory pełne
+gui.crate.redstone.3=Redstone: dowolna komora pusta
+gui.crate.redstone.4=Redstone: wszystkie komory puste
+gui.crate.redstone.5=Redstone: łączne zapełnienie (0–15)
+gui.crate.redstone.single.0=Redstone: Wyłączony
+gui.crate.redstone.single.1=Redstone: Magazyn pełny
+gui.crate.redstone.single.3=Redstone: Magazyn pusty
+gui.crate.redstone.single.5=Redstone: Łączne zapełnienie (0–15)
+gui.crate.side=%s: %s
+gui.crate.unlocked=Przypisanie odblokowane
+
+#CONDUIT GUI
+gui.conduit.interface.selected=Wybrane medium: %s
+gui.conduit.interface.scroll=§fShift + kółko w dół / w górę:§7 wybierz następne / poprzednie medium.
+gui.conduit.interface.mode=§fPPM:§7 zmień tryb kluczem.\n§fShift + PPM:§7 zmień tryb pustą ręką.
+gui.conduit.limits_page=%s / %s
+gui.conduit.help.limits_page=Przełącza strony limitów. Wartości są zapisywane przed przejściem na inną stronę.
+gui.conduit.slot_preview_empty=Brak slotów przedmiotów dostępnych z tej strony.
+gui.conduit.help.destination_slots=Wkładaj tylko do wybranych slotów podłączonego magazynu. Wpisz 1,3,5-9; puste pole oznacza wszystkie. Wybór obowiązuje we wszystkich trybach wkładania i przy docelowej ilości przedmiotów. Numery od 1; sloty niedostępne z tej strony pozostają niedostępne.
+gui.conduit.help.source_slots=Wyciągaj tylko z wybranych slotów podłączonego magazynu. Wpisz 1,3,5-9; puste pole oznacza wszystkie. Numery od 1 dotyczą slotów dostępnych z tej strony i mogą różnić się od GUI maszyny. Nieistniejące sloty są pomijane. Maksymalnie 4096 wybranych slotów.
+gui.conduit.slot_preview=Podłączony magazyn: sloty 1-%s (ta strona).
+gui.conduit.destination_slots=Sloty docelowe
+gui.conduit.source_slots=Sloty źródłowe
+gui.conduit.page.1=Limity
+gui.conduit.page.0=Zachowanie
+gui.conduit.distribution.0=Najbliższy odbiorca
+gui.conduit.distribution.1=Najdalszy odbiorca
+gui.conduit.distribution.2=Najwyższy priorytet
+gui.conduit.distribution.5=Najniższy priorytet
+gui.conduit.distribution.3=Losowy odbiorca
+gui.conduit.distribution.4=Odbiorcy kolejno
+gui.conduit.insertion.0=Uzupełniaj istniejące stosy
+gui.conduit.insertion.1=Wkładaj od pierwszego slotu
+gui.conduit.insertion.2=Wkładaj od ostatniego slotu
+gui.conduit.insertion.3=Wkładaj kolejno do slotów
+gui.conduit.insertion.4=Równomierne rozkładanie
+gui.conduit.insert=Wkładanie
+gui.conduit.extract=Wyciąganie
+gui.conduit.probe.tier=§bPoziom przewodu§7: %s
+gui.conduit.probe.type=§bTyp przewodu§7: %s
+gui.conduit.help.resource=Wybiera zasób konfigurowany na tym połączeniu. Universal zapisuje ustawienia osobno dla każdego zasobu.
+gui.conduit.help.page=Przełącza między ustawieniami transferu, trybami działania i filtrami.
+gui.conduit.help.insert=Pozwala temu połączeniu wkładać zasoby do sąsiedniego ekwipunku lub maszyny.
+gui.conduit.help.extract=Pozwala temu połączeniu wyciągać zasoby z sąsiedniego ekwipunku lub maszyny.
+gui.conduit.help.mode=Insert wkłada zasoby do podłączonego bloku. Extract pobiera je z niego. Disabled wyłącza oba kierunki.
+gui.conduit.help.channel=Tylko połączenia o tym samym kanale mogą wymieniać zasoby lub sygnały redstone.
+gui.conduit.help.priority=Priorytet odbiorcy. Wyższe wartości są wybierane w trybie najwyższego priorytetu, a niższe w trybie najniższego.
+gui.conduit.help.interval=Liczba ticków między próbami pobierania. 20 ticków = 1 sekunda. Nie określa czasu przejazdu animacji.
+gui.conduit.help.limit=Własny limit transferu dla połączenia. 0 oznacza limit tieru przewodu. Dotyczy wkładania i pobierania.
+gui.conduit.help.batch=Maksymalna liczba przedmiotów pobieranych na operację, ograniczona również tierem przewodu.
+gui.conduit.help.keep=Docelowa liczba pasujących przedmiotów w ekwipunku odbiorcy. Wkładanie zatrzymuje się po jej osiągnięciu; 0 wyłącza próg.
+gui.conduit.help.redstone=Określa, czy połączenie działa bez warunku redstone, przy obecności sygnału czy przy jego braku.
+gui.conduit.help.extraction=Wybiera sloty ekwipunku ŹRÓDŁOWEGO: od początku, od końca, losowo lub kolejno po każdym udanym pobraniu.
+gui.conduit.help.insertion=Wybiera sloty DOCELOWE: uzupełnianie stosów, od początku, od końca, kolejno lub równomiernie. Ostatni tryb wyrównuje liczbę pasujących przedmiotów w dostępnych slotach, uwzględniając zawartość i limity.
+gui.conduit.help.distribution=Wybiera połączenia DOCELOWE: najbliższe, najdalsze, o najwyższym lub najniższym priorytecie, losowe lub kolejno.
+gui.conduit.help.blacklist=Biała lista przepuszcza pasujące zasoby. Czarna lista je odrzuca. Bez skonfigurowanego filtra zasoby są dozwolone.
+gui.conduit.help.metadata=Wymaga zgodnych metadanych przedmiotu, np. wariantu drewna lub bloku. Narzędzia korzystają z opcji zużycia.
+gui.conduit.help.nbt=Wymaga identycznych danych NBT, w tym zaklęć i innych zapisanych właściwości przedmiotu.
+gui.conduit.help.damage=Wymaga zgodnego zużycia przedmiotów mających trwałość.
+gui.conduit.help.ore=Dopasowuje wpisy Ore Dictionary przedmiotów w filtrach. W filtrach tekstowych * zastępuje dowolny tekst.\n§fLPM:§7 zmień dopasowanie według przedmiotów.
+gui.conduit.help.mod=Dopasowuje identyfikatory modów przedmiotów w filtrach. Filtry tekstowe używają dokładnych identyfikatorów.\n§fLPM:§7 zmień dopasowanie według przedmiotów.
+gui.conduit.help.fluid=Dopasowuje płyny zawarte w przedmiotach w filtrach. Filtry tekstowe używają dokładnych nazw płynów z rejestru.\n§fLPM:§7 zmień dopasowanie według przedmiotów.
+gui.conduit.help.unavailable=Niedostępne dla wybranego zasobu lub trybu połączenia.
+
+#MACHINE RANGE GUI
+gui.machine.range=Zasięg: %s / %s bloków
+gui.machine.range.desc=Zmień promień o 1 blok. Przytrzymaj Shift, aby zmienić go o 4.
+gui.machine.range.mode.0=Podgląd zasięgu: wyłączony
+gui.machine.range.mode.1=Podgląd zasięgu: teren
+gui.machine.range.mode.2=Podgląd zasięgu: pełny
+gui.machine.range.mode.desc=Kliknij, aby przełączyć: wyłączony, teren, pełny. Tryb terenu prowadzi kontur po podłożu i ukrywa podgląd za przeszkodami. Nie zmienia zasięgu działania.
+
+#STORAGE CONTROLLER GUI
+gui.controller.input=Wejście magazynu
+gui.controller.output=Wyjście magazynu
+gui.controller.assign=Przypisuj puste przegródki
+gui.controller.existing=Tylko przypisane typy przedmiotów
+gui.controller.connected=Połączone skrzynie: %s
+gui.controller.assign.desc=Najpierw uzupełnia pasujące przegródki, potem przypisuje puste i niezablokowane.
+gui.controller.existing.desc=Przyjmuje tylko przypisane typy przedmiotów, również do pustych zablokowanych przegródek.
+
+#CONTROLLING GUI
+gui.controlling.sort.0=Domyślne
+gui.controlling.sort.1=A-Z
+gui.controlling.sort.2=Z-A
+gui.controlling.sort.3=Kat. A-Z
+gui.controlling.sort.4=Kat. Z-A
+gui.controlling.sort.5=Mod A-Z
+gui.controlling.sort.6=Mod Z-A
+
+#JEI
+gui.jei.rock_crusher.chance=%.2f%%
+gui.jei.rock_crusher.count_chance=§7%s szt.: %.2f%%
+gui.jei.rock_crusher.energy=%s FE/t
+gui.jei.rock_crusher.experience=%s XP
+gui.jei.rock_crusher.time=%s s
+
+#CONFIG
+config.minersprosperity.category.conduits=Przewody
+config.minersprosperity.category.conduits.tooltip=Ustawienia transferu, wydajności i wyglądu przewodów
+config.minersprosperity.other.vanilla_resource_overrides=Nadpisania zasobów Minecrafta
+
+#KEYBINDS
+key.find_item=Znajdź wskazany przedmiot w pobliskich magazynach
+
+#TOOLTIPS
+tooltip.inventory_slots=§bLiczba slotów§7: %s
+
+#BACKPACK TOOLTIPS
+tooltip.backpack.hit_deposit=Hit Deposit:
+
+#STORAGE CRATE TOOLTIPS
+tooltip.storage_crate.capacity=Pojemność: %s stacków łącznie; komory: %s
+tooltip.storage_crate.capacity_label=Pojemność
+tooltip.storage_crate.compacting=Wspólny magazyn dla odwracalnych receptur 2x2/3x3; wyświetlane formy nie są osobnymi zapasami.
+tooltip.storage_crate.compartments=Komory
+tooltip.storage_crate.extract=LPM: weź sztukę; Shift + LPM: weź stack.
+tooltip.storage_crate.gui=Shift + PPM: otwórz ekwipunek i konfigurację.
+tooltip.storage_crate.insert=PPM: włóż; podwójny PPM: włóż pasujące itemy z ekwipunku.
+tooltip.storage_crate.pickup=Klucz + LPM: podnieś wraz z zawartością.
+tooltip.storage_crate.stacks=%s stosów łącznie
+
+#CONDUIT TOOLTIPS
+tooltip.conduit.energy_conduit=Przesyła energię między maszynami i magazynami energii.
+tooltip.conduit.item_duct=Przesyła przedmioty między ekwipunkami.
+tooltip.conduit.fluid_pipe=Przesyła płyny między maszynami i zbiornikami.
+tooltip.conduit.redstone_conduit=Przesyła sygnały redstone z użyciem konfigurowalnych kanałów.
+tooltip.conduit.universal_conduit=Przesyła energię, przedmioty, płyny i sygnały redstone.
+tooltip.conduit.rate.0=Przesył energii
+tooltip.conduit.rate.1=Przesył przedmiotów
+tooltip.conduit.rate.2=Przesył płynów
+tooltip.conduit.rate.3=Siła sygnału
+tooltip.conduit.items_per_operation=%s przedmiotów/operację
+tooltip.conduit.fluid_per_operation=%s mB/operację
+tooltip.conduit.interval=Odstęp przesyłania przedmiotów i płynów można ustawić dla każdego połączenia.
+tooltip.trash_can=Bezpowrotnie usuwa przedmioty, płyny i energię.
+
+#ENCHANTMENTS
+enchantment.minersprosperity.quick_mining.desc=Szybko wykopuje połączone skonfigurowane bloki odpowiednim typem narzędzia. Skradanie wyłącza działanie.
+
+#CHAT MESSAGES
+chat.minersprosperity.recipes.errors=[Miner's Prosperity] %s: liczba błędów pliku receptur: %s. Część lub wszystkie receptury mogą być niedostępne. Szczegóły w logu gry/serwera; sprawdź config/minersprosperity/recipes.
+chat.minersprosperity.recipes.updated=[Miner's Prosperity] %s: zaktualizowano receptury z %s do %s. Kopia: %s (w config/minersprosperity/recipes). Utworzono nowe domyślne receptury; własne możesz przenieść z kopii.
+message.backpack.full=Twój plecak jest pełny!
+message.item_search.limit=Osiągnięto limit wyszukiwania; część magazynów mogła nie zostać sprawdzona.
+message.item_search.results=%s: znaleziono w %s magazynach w promieniu %s bloków. Pasujące magazyny zostały oznaczone.

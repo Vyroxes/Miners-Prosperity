@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=north,forms=1": {
+      "model": "minersprosperity:supreme_compacting_storage_crate_1"
+    },
+    "facing=north,forms=2": {
+      "model": "minersprosperity:supreme_compacting_storage_crate_2"
+    },
+    "facing=north,forms=3": {
+      "model": "minersprosperity:supreme_compacting_storage_crate_3"
+    },
+    "facing=north,forms=4": {
+      "model": "minersprosperity:supreme_compacting_storage_crate_4"
+    },
+    "facing=east,forms=1": {
+      "model": "minersprosperity:supreme_compacting_storage_crate_1",
+      "y": 90
+    },
+    "facing=east,forms=2": {
+      "model": "minersprosperity:supreme_compacting_storage_crate_2",
+      "y": 90
+    },
+    "facing=east,forms=3": {
+      "model": "minersprosperity:supreme_compacting_storage_crate_3",
+      "y": 90
+    },
+    "facing=east,forms=4": {
+      "model": "minersprosperity:supreme_compacting_storage_crate_4",
+      "y": 90
+    },
+    "facing=south,forms=1": {
+      "model": "minersprosperity:supreme_compacting_storage_crate_1",
+      "y": 180
+    },
+    "facing=south,forms=2": {
+      "model": "minersprosperity:supreme_compacting_storage_crate_2",
+      "y": 180
+    },
+    "facing=south,forms=3": {
+      "model": "minersprosperity:supreme_compacting_storage_crate_3",
+      "y": 180
+    },
+    "facing=south,forms=4": {
+      "model": "minersprosperity:supreme_compacting_storage_crate_4",
+      "y": 180
+    },
+    "facing=west,forms=1": {
+      "model": "minersprosperity:supreme_compacting_storage_crate_1",
+      "y": 270
+    },
+    "facing=west,forms=2": {
+      "model": "minersprosperity:supreme_compacting_storage_crate_2",
+      "y": 270
+    },
+    "facing=west,forms=3": {
+      "model": "minersprosperity:supreme_compacting_storage_crate_3",
+      "y": 270
+    },
+    "facing=west,forms=4": {
+      "model": "minersprosperity:supreme_compacting_storage_crate_4",
+      "y": 270
+    }
+  }
+}

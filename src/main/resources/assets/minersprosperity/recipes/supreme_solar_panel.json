@@ -1,0 +1,30 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "GSG",
+    "SFS",
+    "PCP"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "S": {
+      "item": "minersprosperity:silicon"
+    },
+    "F": {
+      "item": "minersprosperity:supreme_machine_frame"
+    },
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plateLuminosite"
+    },
+    "C": {
+      "item": "minersprosperity:supreme_circuit_board"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:supreme_solar_panel",
+    "count": 1
+  }
+}

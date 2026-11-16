@@ -1,0 +1,34 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "PHP",
+    "BFB",
+    "ICI"
+  ],
+  "key": {
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plateIron"
+    },
+    "H": {
+      "item": "minersprosperity:heating_element"
+    },
+    "B": {
+      "item": "minecraft:furnace"
+    },
+    "F": {
+      "item": "minersprosperity:basic_machine_frame"
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    },
+    "C": {
+      "item": "minersprosperity:basic_circuit_board"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:alloy_furnace",
+    "count": 1
+  }
+}

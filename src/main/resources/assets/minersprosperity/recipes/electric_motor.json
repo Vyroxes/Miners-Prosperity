@@ -1,0 +1,29 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "ICI",
+    "RGR",
+    "ICI"
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "plateIron"
+    },
+    "C": {
+      "item": "minersprosperity:copper_coil"
+    },
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "rodIron"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "gearSteel"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:electric_motor",
+    "count": 1
+  }
+}

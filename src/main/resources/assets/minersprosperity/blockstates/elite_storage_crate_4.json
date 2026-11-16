@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north,forms=1": {
+      "model": "minersprosperity:elite_storage_crate_4"
+    },
+    "facing=east,forms=1": {
+      "model": "minersprosperity:elite_storage_crate_4",
+      "y": 90
+    },
+    "facing=south,forms=1": {
+      "model": "minersprosperity:elite_storage_crate_4",
+      "y": 180
+    },
+    "facing=west,forms=1": {
+      "model": "minersprosperity:elite_storage_crate_4",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "key": {
+    "C": {
+      "item": "minersprosperity:basic_storage_crate"
+    },
+    "P": {
+      "ore": "plateIron",
+      "type": "forge:ore_dict"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "F": {
+      "item": "minersprosperity:improved_machine_frame"
+    }
+  },
+  "type": "forge:ore_shaped",
+  "result": {
+    "item": "minersprosperity:storage_crate_controller"
+  },
+  "pattern": [
+    "PCP",
+    "RFR",
+    "PCP"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "PSP",
+    "BEB",
+    "PCP"
+  ],
+  "key": {
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plateSteel"
+    },
+    "S": {
+      "item": "minersprosperity:servo"
+    },
+    "B": {
+      "item": "minersprosperity:basic_circuit_board"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "C": {
+      "item": "minersprosperity:copper_coil"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:machine_relocator",
+    "count": 1
+  }
+}

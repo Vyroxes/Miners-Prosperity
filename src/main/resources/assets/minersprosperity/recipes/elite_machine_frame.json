@@ -1,0 +1,27 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "PGP",
+    "CFC",
+    "PGP"
+  ],
+  "key": {
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plateTitanium"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "C": {
+      "item": "minersprosperity:copper_coil"
+    },
+    "F": {
+      "item": "minersprosperity:advanced_machine_frame"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:elite_machine_frame",
+    "count": 1
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " R ",
+    "PWP",
+    " I "
+  ],
+  "key": {
+    "R": {
+      "item": "minersprosperity:rubber"
+    },
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plankWood"
+    },
+    "W": {
+      "item": "minecraft:crafting_table"
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:portable_crafting_table",
+    "count": 1
+  }
+}

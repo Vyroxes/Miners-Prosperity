@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CFC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "minersprosperity:improved_energy_conduit"
+    },
+    "F": {
+      "item": "minersprosperity:advanced_machine_frame"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:advanced_energy_conduit",
+    "count": 8
+  }
+}

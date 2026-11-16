@@ -1,0 +1,9 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "minersprosperity:advanced_energy_conduit_dynamic"
+      }
+    }
+  ]
+}

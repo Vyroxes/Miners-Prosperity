@@ -1,0 +1,9 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "minersprosperity:basic_fluid_pipe_dynamic"
+      }
+    }
+  ]
+}

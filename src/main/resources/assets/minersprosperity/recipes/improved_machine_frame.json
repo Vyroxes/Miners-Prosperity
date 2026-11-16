@@ -1,0 +1,27 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "PGP",
+    "CFC",
+    "PGP"
+  ],
+  "key": {
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plateSteel"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "C": {
+      "item": "minersprosperity:copper_coil"
+    },
+    "F": {
+      "item": "minersprosperity:basic_machine_frame"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:improved_machine_frame",
+    "count": 1
+  }
+}

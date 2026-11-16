@@ -1,0 +1,27 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "PGP",
+    "RMR",
+    " P "
+  ],
+  "key": {
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plateIron"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "R": {
+      "item": "minersprosperity:rubber"
+    },
+    "M": {
+      "item": "minersprosperity:electric_motor"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:pump_component",
+    "count": 1
+  }
+}

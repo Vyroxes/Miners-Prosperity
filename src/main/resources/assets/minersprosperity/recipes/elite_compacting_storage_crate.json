@@ -1,0 +1,30 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "PCP",
+    "GFG",
+    "PBP"
+  ],
+  "key": {
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plateTitanium"
+    },
+    "C": {
+      "item": "minecraft:crafting_table"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "gearIron"
+    },
+    "F": {
+      "item": "minersprosperity:elite_machine_frame"
+    },
+    "B": {
+      "item": "minersprosperity:elite_circuit_board"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:elite_compacting_storage_crate"
+  }
+}

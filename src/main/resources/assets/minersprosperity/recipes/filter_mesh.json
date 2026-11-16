@@ -1,0 +1,21 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "R R",
+    " S ",
+    "R R"
+  ],
+  "key": {
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "rodIron"
+    },
+    "S": {
+      "item": "minecraft:string"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:filter_mesh",
+    "count": 2
+  }
+}

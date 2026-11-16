@@ -1,0 +1,23 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "PCP",
+    "CFC",
+    "PCP"
+  ],
+  "key": {
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plateTitanium"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "F": {
+      "item": "minersprosperity:elite_machine_frame"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:elite_storage_crate_4"
+  }
+}

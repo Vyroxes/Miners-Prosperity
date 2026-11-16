@@ -1,0 +1,28 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " RD",
+    "PWP",
+    " P "
+  ],
+  "key": {
+    "R": {
+      "item": "minersprosperity:rubber"
+    },
+    "D": {
+      "item": "minecraft:dye",
+      "data": 1
+    },
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plateIron"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:fire_extinguisher",
+    "count": 1
+  }
+}

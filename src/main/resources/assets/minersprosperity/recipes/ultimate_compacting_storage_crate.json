@@ -1,0 +1,30 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "PCP",
+    "GFG",
+    "PBP"
+  ],
+  "key": {
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plateCobaltsteel"
+    },
+    "C": {
+      "item": "minecraft:crafting_table"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "gearIron"
+    },
+    "F": {
+      "item": "minersprosperity:ultimate_machine_frame"
+    },
+    "B": {
+      "item": "minersprosperity:ultimate_circuit_board"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:ultimate_compacting_storage_crate"
+  }
+}

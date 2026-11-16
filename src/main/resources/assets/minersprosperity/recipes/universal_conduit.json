@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minersprosperity:supreme_energy_conduit"
+    },
+    {
+      "item": "minersprosperity:supreme_item_duct"
+    },
+    {
+      "item": "minersprosperity:supreme_fluid_pipe"
+    },
+    {
+      "item": "minersprosperity:redstone_conduit"
+    },
+    {
+      "item": "minersprosperity:supreme_machine_frame"
+    },
+    {
+      "item": "minecraft:nether_star"
+    }
+  ],
+  "result": {
+    "item": "minersprosperity:universal_conduit",
+    "count": 1
+  }
+}

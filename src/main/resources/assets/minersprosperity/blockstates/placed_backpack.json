@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "minersprosperity:placed_backpack"
+    },
+    "facing=south": {
+      "model": "minersprosperity:placed_backpack"
+    },
+    "facing=east": {
+      "model": "minersprosperity:placed_backpack"
+    },
+    "facing=west": {
+      "model": "minersprosperity:placed_backpack"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+[
+	{
+		"modid": "minersprosperity",
+		"name": "Miner's Prosperity",
+		"description": "Tech mod.",
+		"version": "${version}",
+		"mcversion": "1.12.2",
+		"url": "",
+		"updateUrl": "",
+		"authorList": ["Vyroxes"],
+		"credits": "",
+		"logoFile": "",
+		"screenshots": [],
+		"dependencies": []
+	}
+]

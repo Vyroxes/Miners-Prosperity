@@ -1,0 +1,23 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "PCP",
+    "CFC",
+    "PCP"
+  ],
+  "key": {
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plateSteel"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "F": {
+      "item": "minersprosperity:improved_machine_frame"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:improved_storage_crate_4"
+  }
+}

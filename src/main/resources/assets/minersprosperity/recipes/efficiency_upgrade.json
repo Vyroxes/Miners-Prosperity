@@ -1,0 +1,27 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " P ",
+    "CMC",
+    " R "
+  ],
+  "key": {
+    "P": {
+      "item": "minersprosperity:servo"
+    },
+    "C": {
+      "item": "minecraft:quartz"
+    },
+    "M": {
+      "item": "minersprosperity:machine_upgrade"
+    },
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "plateSteel"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:efficiency_upgrade",
+    "count": 1
+  }
+}

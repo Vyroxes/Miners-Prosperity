@@ -1,0 +1,40 @@
+{
+  "variants": {
+    "facing=north,state=off": {
+      "model": "minersprosperity:trash_can"
+    },
+    "facing=north,state=powered": {
+      "model": "minersprosperity:trash_can"
+    },
+    "facing=north,state=active": {
+      "model": "minersprosperity:trash_can"
+    },
+    "facing=south,state=off": {
+      "model": "minersprosperity:trash_can"
+    },
+    "facing=south,state=powered": {
+      "model": "minersprosperity:trash_can"
+    },
+    "facing=south,state=active": {
+      "model": "minersprosperity:trash_can"
+    },
+    "facing=east,state=off": {
+      "model": "minersprosperity:trash_can"
+    },
+    "facing=east,state=powered": {
+      "model": "minersprosperity:trash_can"
+    },
+    "facing=east,state=active": {
+      "model": "minersprosperity:trash_can"
+    },
+    "facing=west,state=off": {
+      "model": "minersprosperity:trash_can"
+    },
+    "facing=west,state=powered": {
+      "model": "minersprosperity:trash_can"
+    },
+    "facing=west,state=active": {
+      "model": "minersprosperity:trash_can"
+    }
+  }
+}

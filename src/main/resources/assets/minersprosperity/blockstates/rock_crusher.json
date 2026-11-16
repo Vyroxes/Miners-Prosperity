@@ -1,0 +1,47 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "minersprosperity:rock_crusher",
+		"textures": {
+			"front": "minersprosperity:blocks/rock_crusher_front_off"
+		}
+	},
+	"variants": {
+		"inventory": [
+			{
+				"textures": {
+					"front": "minersprosperity:blocks/rock_crusher_front_off"
+				}
+			}
+		],
+		"state": {
+			"off": {
+				"textures": {
+					"front": "minersprosperity:blocks/rock_crusher_front_off"
+				}
+			},
+			"powered": {
+				"textures": {
+					"front": "minersprosperity:blocks/rock_crusher_front_powered"
+				}
+			},
+			"active": {
+				"textures": {
+					"front": "minersprosperity:blocks/rock_crusher_front_active"
+				}
+			}
+		},
+		"facing": {
+			"north": {},
+			"east": {
+				"y": 90
+			},
+			"south": {
+				"y": 180
+			},
+			"west": {
+				"y": 270
+			}
+		}
+	}
+}
