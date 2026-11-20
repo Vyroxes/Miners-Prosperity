@@ -20,6 +20,9 @@ public final class RegistryEvents {
         event.getRegistry().register(ModBlocks.PLACED_BACKPACK);
         event.getRegistry().register(ModBlocks.LIQUID_EXPERIENCE_BLOCK);
         event.getRegistry().register(ModBlocks.CRUDE_OIL_BLOCK);
+        event.getRegistry().register(ModBlocks.DISTILLED_WATER_BLOCK);
+        event.getRegistry().register(ModBlocks.FLOTATION_SOLUTION_BLOCK);
+        event.getRegistry().register(ModBlocks.SULFURIC_ACID_BLOCK);
     }
 
     @SubscribeEvent

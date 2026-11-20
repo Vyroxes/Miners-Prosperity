@@ -127,6 +127,11 @@ public class TooltipHandler
             tile = gui.getTileEntity();
             progressX = 69;
         }
+        else if (event.getGui() instanceof net.vyroxes.minersprosperity.client.gui.GuiSeparator gui)
+        {
+            tile = gui.getTileEntity();
+            progressX = 89;
+        }
         else if (event.getGui() instanceof GuiLiquidFuelGenerator gui)
         {
             tile = gui.getTileEntity();

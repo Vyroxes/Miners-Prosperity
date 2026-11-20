@@ -1,8 +1,10 @@
 package net.vyroxes.minersprosperity.world.gen;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -14,43 +16,45 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import net.vyroxes.minersprosperity.init.ModBlocks;
 import net.vyroxes.minersprosperity.mixin.accessor.ChunkGeneratorFlatAccessor;
 import net.vyroxes.minersprosperity.config.ModConfig;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public class WorldGenCustomOres implements IWorldGenerator
 {
-    private final WorldGenerator HALITE_ORE = new WorldGenMinable(ModBlocks.HALITE_ORE.getDefaultState(), ModConfig.ORES.clusterSizeHaliteOre, BlockMatcher.forBlock(Blocks.STONE));
-    private final WorldGenerator SULFUR_ORE = new WorldGenMinable(ModBlocks.SULFUR_ORE.getDefaultState(), ModConfig.ORES.clusterSizeSulfurOre, BlockMatcher.forBlock(Blocks.STONE));
-    private final WorldGenerator GRAPHITE_ORE = new WorldGenMinable(ModBlocks.GRAPHITE_ORE.getDefaultState(), ModConfig.ORES.clusterSizeGraphiteOre, BlockMatcher.forBlock(Blocks.STONE));
-    private final WorldGenerator COPPER_ORE = new WorldGenMinable(ModBlocks.COPPER_ORE.getDefaultState(), ModConfig.ORES.clusterSizeCopperOre, BlockMatcher.forBlock(Blocks.STONE));
-    private final WorldGenerator TIN_ORE = new WorldGenMinable(ModBlocks.TIN_ORE.getDefaultState(), ModConfig.ORES.clusterSizeTinOre, BlockMatcher.forBlock(Blocks.STONE));
-    private final WorldGenerator SILVER_ORE = new WorldGenMinable(ModBlocks.SILVER_ORE.getDefaultState(), ModConfig.ORES.clusterSizeSilverOre, BlockMatcher.forBlock(Blocks.STONE));
-    private final WorldGenerator LEAD_ORE = new WorldGenMinable(ModBlocks.LEAD_ORE.getDefaultState(), ModConfig.ORES.clusterSizeLeadOre, BlockMatcher.forBlock(Blocks.STONE));
-    private final WorldGenerator ZINC_ORE = new WorldGenMinable(ModBlocks.ZINC_ORE.getDefaultState(), ModConfig.ORES.clusterSizeZincOre, BlockMatcher.forBlock(Blocks.STONE));
-    private final WorldGenerator ALUMINUM_ORE = new WorldGenMinable(ModBlocks.ALUMINUM_ORE.getDefaultState(), ModConfig.ORES.clusterSizeAluminumOre, BlockMatcher.forBlock(Blocks.STONE));
-    private final WorldGenerator NICKEL_ORE = new WorldGenMinable(ModBlocks.NICKEL_ORE.getDefaultState(), ModConfig.ORES.clusterSizeNickelOre, BlockMatcher.forBlock(Blocks.STONE));
-    private final WorldGenerator CHROMIUM_ORE = new WorldGenMinable(ModBlocks.CHROMIUM_ORE.getDefaultState(), ModConfig.ORES.clusterSizeChromiumOre, BlockMatcher.forBlock(Blocks.STONE));
-    private final WorldGenerator URANIUM_ORE = new WorldGenMinable(ModBlocks.URANIUM_ORE.getDefaultState(), ModConfig.ORES.clusterSizeUraniumOre, BlockMatcher.forBlock(Blocks.STONE));
-    private final WorldGenerator TUNGSTEN_ORE = new WorldGenMinable(ModBlocks.TUNGSTEN_ORE.getDefaultState(), ModConfig.ORES.clusterSizeTungstenOre, BlockMatcher.forBlock(Blocks.STONE));
-    private final WorldGenerator PLATINUM_ORE = new WorldGenMinable(ModBlocks.PLATINUM_ORE.getDefaultState(), ModConfig.ORES.clusterSizePlatinumOre, BlockMatcher.forBlock(Blocks.STONE));
-    private final WorldGenerator IRIDIUM_ORE = new WorldGenMinable(ModBlocks.IRIDIUM_ORE.getDefaultState(), ModConfig.ORES.clusterSizeIridiumOre, BlockMatcher.forBlock(Blocks.STONE));
-    private final WorldGenerator TITANIUM_ORE = new WorldGenMinable(ModBlocks.TITANIUM_ORE.getDefaultState(), ModConfig.ORES.clusterSizeTitaniumOre, BlockMatcher.forBlock(Blocks.STONE));
-    private final WorldGenerator RUBY_ORE = new WorldGenMinable(ModBlocks.RUBY_ORE.getDefaultState(), ModConfig.ORES.clusterSizeRubyOre, BlockMatcher.forBlock(Blocks.STONE));
-    private final WorldGenerator SAPPHIRE_ORE = new WorldGenMinable(ModBlocks.SAPPHIRE_ORE.getDefaultState(), ModConfig.ORES.clusterSizeSapphireOre, BlockMatcher.forBlock(Blocks.STONE));
-    private final WorldGenerator AMETHYST_ORE = new WorldGenMinable(ModBlocks.AMETHYST_ORE.getDefaultState(), ModConfig.ORES.clusterSizeAmethystOre, BlockMatcher.forBlock(Blocks.STONE));
-    private final WorldGenerator TOPAZ_ORE = new WorldGenMinable(ModBlocks.TOPAZ_ORE.getDefaultState(), ModConfig.ORES.clusterSizeTopazOre, BlockMatcher.forBlock(Blocks.STONE));
-    private final WorldGenerator PERIDOT_ORE = new WorldGenMinable(ModBlocks.PERIDOT_ORE.getDefaultState(), ModConfig.ORES.clusterSizePeridotOre, BlockMatcher.forBlock(Blocks.STONE));
-    private final WorldGenerator COBALT_ORE = new WorldGenMinable(ModBlocks.COBALT_ORE.getDefaultState(), ModConfig.ORES.clusterSizeCobaltOre, BlockMatcher.forBlock(Blocks.STONE));
-    private final WorldGenerator ONYX_ORE = new WorldGenMinable(ModBlocks.ONYX_ORE.getDefaultState(), ModConfig.ORES.clusterSizeOnyxOre, BlockMatcher.forBlock(Blocks.STONE));
-    private final WorldGenerator BLACK_OPAL_ORE = new WorldGenMinable(ModBlocks.BLACK_OPAL_ORE.getDefaultState(), ModConfig.ORES.clusterSizeBlackOpalOre, BlockMatcher.forBlock(Blocks.STONE));
+    private final WorldGenerator HALITE_ORE = new LoadedChunkOreGenerator(ModBlocks.HALITE_ORE.getDefaultState(), ModConfig.ORES.clusterSizeHaliteOre, BlockMatcher.forBlock(Blocks.STONE));
+    private final WorldGenerator SULFUR_ORE = new LoadedChunkOreGenerator(ModBlocks.SULFUR_ORE.getDefaultState(), ModConfig.ORES.clusterSizeSulfurOre, BlockMatcher.forBlock(Blocks.STONE));
+    private final WorldGenerator GRAPHITE_ORE = new LoadedChunkOreGenerator(ModBlocks.GRAPHITE_ORE.getDefaultState(), ModConfig.ORES.clusterSizeGraphiteOre, BlockMatcher.forBlock(Blocks.STONE));
+    private final WorldGenerator COPPER_ORE = new LoadedChunkOreGenerator(ModBlocks.COPPER_ORE.getDefaultState(), ModConfig.ORES.clusterSizeCopperOre, BlockMatcher.forBlock(Blocks.STONE));
+    private final WorldGenerator TIN_ORE = new LoadedChunkOreGenerator(ModBlocks.TIN_ORE.getDefaultState(), ModConfig.ORES.clusterSizeTinOre, BlockMatcher.forBlock(Blocks.STONE));
+    private final WorldGenerator SILVER_ORE = new LoadedChunkOreGenerator(ModBlocks.SILVER_ORE.getDefaultState(), ModConfig.ORES.clusterSizeSilverOre, BlockMatcher.forBlock(Blocks.STONE));
+    private final WorldGenerator LEAD_ORE = new LoadedChunkOreGenerator(ModBlocks.LEAD_ORE.getDefaultState(), ModConfig.ORES.clusterSizeLeadOre, BlockMatcher.forBlock(Blocks.STONE));
+    private final WorldGenerator ZINC_ORE = new LoadedChunkOreGenerator(ModBlocks.ZINC_ORE.getDefaultState(), ModConfig.ORES.clusterSizeZincOre, BlockMatcher.forBlock(Blocks.STONE));
+    private final WorldGenerator ALUMINUM_ORE = new LoadedChunkOreGenerator(ModBlocks.ALUMINUM_ORE.getDefaultState(), ModConfig.ORES.clusterSizeAluminumOre, BlockMatcher.forBlock(Blocks.STONE));
+    private final WorldGenerator NICKEL_ORE = new LoadedChunkOreGenerator(ModBlocks.NICKEL_ORE.getDefaultState(), ModConfig.ORES.clusterSizeNickelOre, BlockMatcher.forBlock(Blocks.STONE));
+    private final WorldGenerator CHROMIUM_ORE = new LoadedChunkOreGenerator(ModBlocks.CHROMIUM_ORE.getDefaultState(), ModConfig.ORES.clusterSizeChromiumOre, BlockMatcher.forBlock(Blocks.STONE));
+    private final WorldGenerator URANIUM_ORE = new LoadedChunkOreGenerator(ModBlocks.URANIUM_ORE.getDefaultState(), ModConfig.ORES.clusterSizeUraniumOre, BlockMatcher.forBlock(Blocks.STONE));
+    private final WorldGenerator TUNGSTEN_ORE = new LoadedChunkOreGenerator(ModBlocks.TUNGSTEN_ORE.getDefaultState(), ModConfig.ORES.clusterSizeTungstenOre, BlockMatcher.forBlock(Blocks.STONE));
+    private final WorldGenerator PLATINUM_ORE = new LoadedChunkOreGenerator(ModBlocks.PLATINUM_ORE.getDefaultState(), ModConfig.ORES.clusterSizePlatinumOre, BlockMatcher.forBlock(Blocks.STONE));
+    private final WorldGenerator IRIDIUM_ORE = new LoadedChunkOreGenerator(ModBlocks.IRIDIUM_ORE.getDefaultState(), ModConfig.ORES.clusterSizeIridiumOre, BlockMatcher.forBlock(Blocks.STONE));
+    private final WorldGenerator TITANIUM_ORE = new LoadedChunkOreGenerator(ModBlocks.TITANIUM_ORE.getDefaultState(), ModConfig.ORES.clusterSizeTitaniumOre, BlockMatcher.forBlock(Blocks.STONE));
+    private final WorldGenerator RUBY_ORE = new LoadedChunkOreGenerator(ModBlocks.RUBY_ORE.getDefaultState(), ModConfig.ORES.clusterSizeRubyOre, BlockMatcher.forBlock(Blocks.STONE));
+    private final WorldGenerator SAPPHIRE_ORE = new LoadedChunkOreGenerator(ModBlocks.SAPPHIRE_ORE.getDefaultState(), ModConfig.ORES.clusterSizeSapphireOre, BlockMatcher.forBlock(Blocks.STONE));
+    private final WorldGenerator AMETHYST_ORE = new LoadedChunkOreGenerator(ModBlocks.AMETHYST_ORE.getDefaultState(), ModConfig.ORES.clusterSizeAmethystOre, BlockMatcher.forBlock(Blocks.STONE));
+    private final WorldGenerator TOPAZ_ORE = new LoadedChunkOreGenerator(ModBlocks.TOPAZ_ORE.getDefaultState(), ModConfig.ORES.clusterSizeTopazOre, BlockMatcher.forBlock(Blocks.STONE));
+    private final WorldGenerator PERIDOT_ORE = new LoadedChunkOreGenerator(ModBlocks.PERIDOT_ORE.getDefaultState(), ModConfig.ORES.clusterSizePeridotOre, BlockMatcher.forBlock(Blocks.STONE));
+    private final WorldGenerator COBALT_ORE = new LoadedChunkOreGenerator(ModBlocks.COBALT_ORE.getDefaultState(), ModConfig.ORES.clusterSizeCobaltOre, BlockMatcher.forBlock(Blocks.STONE));
+    private final WorldGenerator ONYX_ORE = new LoadedChunkOreGenerator(ModBlocks.ONYX_ORE.getDefaultState(), ModConfig.ORES.clusterSizeOnyxOre, BlockMatcher.forBlock(Blocks.STONE));
+    private final WorldGenerator BLACK_OPAL_ORE = new LoadedChunkOreGenerator(ModBlocks.BLACK_OPAL_ORE.getDefaultState(), ModConfig.ORES.clusterSizeBlackOpalOre, BlockMatcher.forBlock(Blocks.STONE));
 
-    private final WorldGenerator AZURE_ORE = new WorldGenMinable(ModBlocks.AZURE_ORE.getDefaultState(), ModConfig.ORES.clusterSizeAzureOre, BlockMatcher.forBlock(Blocks.NETHERRACK));
-    private final WorldGenerator ROSALITE_ORE = new WorldGenMinable(ModBlocks.ROSALITE_ORE.getDefaultState(), ModConfig.ORES.clusterSizeRosaliteOre, BlockMatcher.forBlock(Blocks.NETHERRACK));
-    private final WorldGenerator VERDITE_ORE = new WorldGenMinable(ModBlocks.VERDITE_ORE.getDefaultState(), ModConfig.ORES.clusterSizeVerditeOre, BlockMatcher.forBlock(Blocks.NETHERRACK));
+    private final WorldGenerator AZURE_ORE = new LoadedChunkOreGenerator(ModBlocks.AZURE_ORE.getDefaultState(), ModConfig.ORES.clusterSizeAzureOre, BlockMatcher.forBlock(Blocks.NETHERRACK));
+    private final WorldGenerator ROSALITE_ORE = new LoadedChunkOreGenerator(ModBlocks.ROSALITE_ORE.getDefaultState(), ModConfig.ORES.clusterSizeRosaliteOre, BlockMatcher.forBlock(Blocks.NETHERRACK));
+    private final WorldGenerator VERDITE_ORE = new LoadedChunkOreGenerator(ModBlocks.VERDITE_ORE.getDefaultState(), ModConfig.ORES.clusterSizeVerditeOre, BlockMatcher.forBlock(Blocks.NETHERRACK));
 
-    private final WorldGenerator VOIDIUM_ORE = new WorldGenMinable(ModBlocks.VOIDIUM_ORE.getDefaultState(), ModConfig.ORES.clusterSizeVoidiumOre, BlockMatcher.forBlock(Blocks.END_STONE));
-    private final WorldGenerator LUMINOSITE_ORE = new WorldGenMinable(ModBlocks.LUMINOSITE_ORE.getDefaultState(), ModConfig.ORES.clusterSizeLuminositeOre, BlockMatcher.forBlock(Blocks.END_STONE));
+    private final WorldGenerator VOIDIUM_ORE = new LoadedChunkOreGenerator(ModBlocks.VOIDIUM_ORE.getDefaultState(), ModConfig.ORES.clusterSizeVoidiumOre, BlockMatcher.forBlock(Blocks.END_STONE));
+    private final WorldGenerator LUMINOSITE_ORE = new LoadedChunkOreGenerator(ModBlocks.LUMINOSITE_ORE.getDefaultState(), ModConfig.ORES.clusterSizeLuminositeOre, BlockMatcher.forBlock(Blocks.END_STONE));
 
     private void runGenerator(WorldGenerator gen, World world, Random rand, int chunkX, int chunkZ, int clusterCount, int minHeight, int maxHeight)
     {
@@ -124,6 +128,30 @@ public class WorldGenCustomOres implements IWorldGenerator
                 if (ModConfig.ORES.generateOnyxOre) runGenerator(ONYX_ORE, world, random, chunkX, chunkZ, ModConfig.ORES.clusterCountOnyxOre, ModConfig.ORES.minHeightOnyxOre, ModConfig.ORES.maxHeightOnyxOre);
                 if (ModConfig.ORES.generateBlackOpalOre) runGenerator(BLACK_OPAL_ORE, world, random, chunkX, chunkZ, ModConfig.ORES.clusterCountBlackOpalOre, ModConfig.ORES.minHeightBlackOpalOre, ModConfig.ORES.maxHeightBlackOpalOre);
                 break;
+        }
+    }
+    private static final class LoadedChunkOreGenerator extends WorldGenMinable
+    {
+        private final float centerOffset;
+        private final double maxRadius;
+
+        private LoadedChunkOreGenerator(IBlockState ore, int size, BlockMatcher target)
+        {
+            super(ore, size, target);
+            centerOffset = size / 8.0F;
+            maxRadius = size / 16.0D + 0.5D;
+        }
+
+        @Override
+        public boolean generate(World world, @NotNull Random random, BlockPos position)
+        {
+            float x = position.getX() + 8;
+            float z = position.getZ() + 8;
+            BlockPos min = new BlockPos(MathHelper.floor((x - centerOffset) - maxRadius), 0,
+                    MathHelper.floor((z - centerOffset) - maxRadius));
+            BlockPos max = new BlockPos(MathHelper.floor((x + centerOffset) + maxRadius), 0,
+                    MathHelper.floor((z + centerOffset) + maxRadius));
+            return world.isAreaLoaded(min, max) && super.generate(world, random, position);
         }
     }
 }

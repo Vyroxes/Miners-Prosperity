@@ -57,7 +57,7 @@ public final class ConduitHighlight
             if (!(entry instanceof TileEntityConduit tile) || tile.conduit() == null || tile.getDistanceSq(x,y,z) > 4096) continue;
             if (type != 0 && tile.conduit().type.ordinal() != type - 1 || tier != 0 && tile.conduit().tier.ordinal() != tier - 1) continue;
             if (++count > ModConfig.CONDUITS.highlightLimit) break;
-            int color = mc.player.isSneaking() ? tile.conduit().tier.color : tile.conduit().type.color;
+            int color = mc.player.isSneaking() && tile.conduit().type.isTiered() ? tile.conduit().tier.color : tile.conduit().type.color;
             AxisAlignedBB core = tile.conduit().coreShape(mc.world, tile.getPos());
             java.util.List<net.minecraft.util.EnumFacing> sides = new java.util.ArrayList<>();
             for (net.minecraft.util.EnumFacing side : net.minecraft.util.EnumFacing.VALUES)

@@ -64,14 +64,15 @@ public final class ConduitInterfaceHandler
         List<String> lines = new ArrayList<>(7);
         if (universal)
             lines.add(TextFormatting.WHITE + I18n.format("gui.conduit.interface.selected", I18n.format("gui.conduit.resource." + selected)));
-        for (int resource = 0; resource < 4; resource++)
+        for (int resource = 0; resource < ConduitType.RESOURCE_COUNT; resource++)
         {
             if (!type.supports(resource)) continue;
             lines.add((resource == selected ? TextFormatting.WHITE : TextFormatting.GRAY)
-                    + I18n.format("gui.conduit.resource." + resource) + ": " + I18n.format("gui.conduit.mode." + tile.ports[side][resource].mode));
+                    + I18n.format("gui.conduit.resource." + resource)
+                    + (resource == ConduitType.LOGIC_RESOURCE ? "" : ": " + I18n.format("gui.conduit.mode." + tile.ports[side][resource].mode)));
         }
         if (universal) lines.add(TextFormatting.GRAY + I18n.format("gui.conduit.interface.scroll"));
-        lines.addAll(mc.fontRenderer.listFormattedStringToWidth(TextFormatting.GRAY + I18n.format("gui.conduit.interface.mode").replace("\\n", "\n"), 230));
+        if (selected != ConduitType.LOGIC_RESOURCE) lines.addAll(mc.fontRenderer.listFormattedStringToWidth(TextFormatting.GRAY + I18n.format("gui.conduit.interface.mode").replace("\\n", "\n"), 230));
         int width = event.getResolution().getScaledWidth();
         int height = event.getResolution().getScaledHeight();
         GuiUtils.drawHoveringText(lines, width / 2 + 12, height / 2 + 12, width, height, 260, mc.fontRenderer);

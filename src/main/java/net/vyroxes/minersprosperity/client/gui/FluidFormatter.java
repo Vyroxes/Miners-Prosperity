@@ -15,13 +15,18 @@ public final class FluidFormatter
                 + " (" + EnergyFormatter.percentage(stored, capacity) + ")";
     }
 
-    public static String transfer(int amount)
+    public static String amount(long amount)
     {
         int divisor = getDivisor(amount);
-        return format(amount, divisor) + " " + getUnit(divisor) + "/t";
+        return format(amount, divisor) + " " + getUnit(divisor);
     }
 
-    private static int getDivisor(int amount)
+    public static String transfer(int amount)
+    {
+        return amount(amount) + "/t";
+    }
+
+    private static int getDivisor(long amount)
     {
         if (amount >= 1_000_000_000) return 1_000_000_000;
         if (amount >= 1_000_000) return 1_000_000;
@@ -40,7 +45,7 @@ public final class FluidFormatter
         };
     }
 
-    private static String format(int amount, int divisor)
+    private static String format(long amount, int divisor)
     {
         return BigDecimal.valueOf(amount).divide(BigDecimal.valueOf(divisor)).stripTrailingZeros().toPlainString();
     }

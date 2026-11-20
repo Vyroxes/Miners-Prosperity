@@ -1,0 +1,34 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+            "particle": "minersprosperity:blocks/distilled_water_still",
+            "all": "minersprosperity:blocks/distilled_water_flow"
+        },
+        "model": "forge:fluid",
+        "custom": { "fluid": "distilled_water" },
+        "uvlock": false
+    },
+    "variants": {
+        "normal": [{}],
+        "inventory": [{}],
+        "level": {
+            "0": { },
+            "1": { },
+            "2": { },
+            "3": { },
+            "4": { },
+            "5": { },
+            "6": { },
+            "7": { },
+            "8": { },
+            "9": { },
+            "10": { },
+            "11": { },
+            "12": { },
+            "13": { },
+            "14": { },
+            "15": { }
+        }
+    }
+}

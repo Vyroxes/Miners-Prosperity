@@ -63,7 +63,7 @@ public class ItemConduitProbe extends ItemBase
             NBTTagCompound tag = stack.getTagCompound();
             if (tag == null) { tag = new NBTTagCompound(); stack.setTagCompound(tag); }
             String key = player.isSneaking() ? "Tier" : "Type";
-            int value = (tag.getInteger(key) + 1) % (player.isSneaking() ? 7 : 6);
+            int value = (tag.getInteger(key) + 1) % (player.isSneaking() ? 7 : net.vyroxes.minersprosperity.transport.ConduitType.values().length + 1);
             tag.setInteger(key, value);
             player.sendStatusMessage(new TextComponentTranslation("gui.conduit.probe." + key.toLowerCase(java.util.Locale.ROOT), new TextComponentTranslation("gui.conduit.probe." + key.toLowerCase(java.util.Locale.ROOT) + "." + value)).setStyle(new Style().setColor(TextFormatting.GRAY)), true);
         }

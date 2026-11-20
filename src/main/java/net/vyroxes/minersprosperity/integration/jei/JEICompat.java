@@ -14,6 +14,7 @@ import net.vyroxes.minersprosperity.client.gui.GuiMetalPress;
 import net.vyroxes.minersprosperity.client.gui.GuiPulverizer;
 import net.vyroxes.minersprosperity.client.gui.GuiCrystallizer;
 import net.vyroxes.minersprosperity.client.gui.GuiGrinder;
+import net.vyroxes.minersprosperity.client.gui.GuiSeparator;
 import net.vyroxes.minersprosperity.integration.jei.alloy_furnace.AlloyFurnaceRecipeCategory;
 import net.vyroxes.minersprosperity.integration.jei.alloy_furnace.AlloyFurnaceRecipeMaker;
 import net.vyroxes.minersprosperity.integration.jei.metal_press.MetalPressRecipeCategory;
@@ -21,9 +22,11 @@ import net.vyroxes.minersprosperity.integration.jei.metal_press.MetalPressRecipe
 import net.vyroxes.minersprosperity.integration.jei.pulverizer.PulverizerRecipeCategory;
 import net.vyroxes.minersprosperity.integration.jei.crystallizer.CrystallizerRecipeCategory;
 import net.vyroxes.minersprosperity.integration.jei.grinder.GrinderRecipeCategory;
+import net.vyroxes.minersprosperity.integration.jei.separator.SeparatorRecipeCategory;
 import net.vyroxes.minersprosperity.integration.jei.pulverizer.PulverizerRecipeMaker;
 import net.vyroxes.minersprosperity.integration.jei.crystallizer.CrystallizerRecipeMaker;
 import net.vyroxes.minersprosperity.integration.jei.grinder.GrinderRecipeMaker;
+import net.vyroxes.minersprosperity.integration.jei.separator.SeparatorRecipeMaker;
 import net.vyroxes.minersprosperity.integration.jei.material_tree.MaterialTreeRecipeCategory;
 import net.vyroxes.minersprosperity.integration.jei.material_tree.MaterialTreeRecipeMaker;
 import net.vyroxes.minersprosperity.client.gui.GuiLiquidFuelGenerator;
@@ -155,6 +158,7 @@ public class JEICompat implements IModPlugin
         registry.addRecipeCategories(new PulverizerRecipeCategory(gui));
         if (ModConfig.MACHINES.enableCrystallizer) registry.addRecipeCategories(new CrystallizerRecipeCategory(gui));
         if (ModConfig.MACHINES.enableGrinder) registry.addRecipeCategories(new GrinderRecipeCategory(gui));
+        if (ModConfig.MACHINES.enableSeparator) registry.addRecipeCategories(new SeparatorRecipeCategory(gui));
         if (ModConfig.MACHINES.enableRockCrusher) registry.addRecipeCategories(new net.vyroxes.minersprosperity.integration.jei.rock_crusher.RockCrusherRecipeCategory(gui));
         registry.addRecipeCategories(new MetalPressRecipeCategory(gui));
         registry.addRecipeCategories(new MaterialTreeRecipeCategory(gui));
@@ -277,6 +281,14 @@ public class JEICompat implements IModPlugin
             registry.addRecipeClickArea(GuiGrinder.class, 69, 36, 21, 15, RecipeCategories.GRINDER);
             recipeTransfer.addRecipeTransferHandler(ContainerGrinder.class, RecipeCategories.GRINDER, 0, 1, 3, 36);
             registry.addRecipeCatalyst(new ItemStack(ModBlocks.GRINDER), RecipeCategories.GRINDER);
+        }
+
+        if (ModConfig.MACHINES.enableSeparator)
+        {
+            registry.addRecipes(SeparatorRecipeMaker.getRecipes(jeiHelpers), RecipeCategories.SEPARATOR);
+            registry.addRecipeClickArea(GuiSeparator.class, 89, 36, 22, 15, RecipeCategories.SEPARATOR);
+            recipeTransfer.addRecipeTransferHandler(ContainerSeparator.class, RecipeCategories.SEPARATOR, 0, 1, 5, 36);
+            registry.addRecipeCatalyst(new ItemStack(ModBlocks.SEPARATOR), RecipeCategories.SEPARATOR);
         }
 
         if (ModConfig.MACHINES.enableMetalPress)

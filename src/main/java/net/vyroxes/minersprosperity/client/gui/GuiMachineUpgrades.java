@@ -61,6 +61,7 @@ public class GuiMachineUpgrades extends GuiContainer
             else if (tileEntity instanceof TileEntityPulverizer) NetworkHandler.sendOpenGuiUpdate(GuiHandler.GuiTypes.PULVERIZER.ordinal(), this.tileEntity.getPos());
             else if (tileEntity instanceof TileEntityCrystallizer) NetworkHandler.sendOpenGuiUpdate(GuiHandler.GuiTypes.CRYSTALLIZER.ordinal(), this.tileEntity.getPos());
             else if (tileEntity instanceof TileEntityGrinder) NetworkHandler.sendOpenGuiUpdate(GuiHandler.GuiTypes.GRINDER.ordinal(), this.tileEntity.getPos());
+            else if (tileEntity instanceof TileEntitySeparator) NetworkHandler.sendOpenGuiUpdate(GuiHandler.GuiTypes.SEPARATOR.ordinal(), this.tileEntity.getPos());
             else if (tileEntity instanceof TileEntityRockCrusher) NetworkHandler.sendOpenGuiUpdate(GuiHandler.GuiTypes.ROCK_CRUSHER.ordinal(), this.tileEntity.getPos());
         }
         this.initGui();
@@ -119,6 +120,7 @@ public class GuiMachineUpgrades extends GuiContainer
             else if (tileEntity instanceof TileEntityPulverizer) NetworkHandler.sendOpenGuiUpdate(GuiHandler.GuiTypes.PULVERIZER.ordinal(), this.tileEntity.getPos());
             else if (tileEntity instanceof TileEntityCrystallizer) NetworkHandler.sendOpenGuiUpdate(GuiHandler.GuiTypes.CRYSTALLIZER.ordinal(), this.tileEntity.getPos());
             else if (tileEntity instanceof TileEntityGrinder) NetworkHandler.sendOpenGuiUpdate(GuiHandler.GuiTypes.GRINDER.ordinal(), this.tileEntity.getPos());
+            else if (tileEntity instanceof TileEntitySeparator) NetworkHandler.sendOpenGuiUpdate(GuiHandler.GuiTypes.SEPARATOR.ordinal(), this.tileEntity.getPos());
             else if (tileEntity instanceof TileEntityRockCrusher) NetworkHandler.sendOpenGuiUpdate(GuiHandler.GuiTypes.ROCK_CRUSHER.ordinal(), this.tileEntity.getPos());
         }
     }

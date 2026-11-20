@@ -247,7 +247,7 @@ public final class ConduitPort
         useModID = tag.getBoolean("UseModID");
         useFluid = !tag.hasKey("UseFluid") || tag.getBoolean("UseFluid");
         blacklist = tag.getBoolean("Blacklist");
-        metadata = tag.getBoolean("Metadata");
+        metadata = !tag.hasKey("Metadata") || tag.getBoolean("Metadata");
         nbt = tag.getBoolean("NBT");
         damage = tag.getBoolean("Damage");
         setTextFilter(TextFilterList.Type.ORE, tag.getString("Ore"));

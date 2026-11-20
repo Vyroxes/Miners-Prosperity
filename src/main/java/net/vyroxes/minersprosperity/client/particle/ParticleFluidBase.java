@@ -19,7 +19,7 @@ public abstract class ParticleFluidBase extends Particle
         this.fluid = fluid;
         this.setParticleTexture(texture);
 
-        int color = fluid.getColor();
+        int color = fluid.getParticleColor();
 
         float red = ((color >> 16) & 0xFF) / 255.0F;
         float green = ((color >> 8) & 0xFF) / 255.0F;

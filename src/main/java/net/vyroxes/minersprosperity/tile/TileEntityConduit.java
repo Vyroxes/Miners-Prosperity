@@ -34,6 +34,7 @@ public class TileEntityConduit extends TileEntity
     public int animationFrom;
     public int animationTo = 1;
     public long lastAnimation = -100;
+    public long transportSavedAt = -1;
     public final java.util.Deque<NBTTagCompound> itemTransits = new java.util.ArrayDeque<>();
 
     public final java.util.Deque<NBTTagCompound> fluidTransits = new java.util.ArrayDeque<>();
@@ -88,12 +89,12 @@ public class TileEntityConduit extends TileEntity
     public int getInterfaceResource(int side)
     {
         BlockConduit block = conduit();
-        return block != null && block.type != ConduitType.UNIVERSAL ? block.type.ordinal() : interfaceResources[side];
+        return block != null && block.type != ConduitType.UNIVERSAL ? block.type.resourceIndex() : interfaceResources[side];
     }
 
     public void cycleInterfaceResource(int side, int direction)
     {
-        interfaceResources[side] = Math.floorMod(interfaceResources[side] + direction, 4);
+        interfaceResources[side] = Math.floorMod(interfaceResources[side] + direction, ConduitType.RESOURCE_COUNT);
         markDirty();
         if (world == null) return;
         IBlockState state = world.getBlockState(pos);
@@ -102,7 +103,9 @@ public class TileEntityConduit extends TileEntity
 
     public void cycleInterfaceMode(int side)
     {
-        ConduitPort port = ports[side][getInterfaceResource(side)];
+        int resource = getInterfaceResource(side);
+        if (resource == ConduitType.LOGIC_RESOURCE) return;
+        ConduitPort port = ports[side][resource];
         port.mode = (port.mode + 1) % 4;
         changed();
     }
@@ -119,7 +122,7 @@ public class TileEntityConduit extends TileEntity
     {
         int[] resources = tag.getIntArray("InterfaceResources");
         for (int side = 0; side < 6; side++)
-            interfaceResources[side] = resources.length == 6 ? Math.floorMod(resources[side], 4) : 0;
+            interfaceResources[side] = resources.length == 6 ? Math.floorMod(resources[side], ConduitType.RESOURCE_COUNT) : 0;
     }
 
     public boolean enabled(EnumFacing side, int resource)
@@ -175,6 +178,7 @@ public class TileEntityConduit extends TileEntity
     @Override
     public void onChunkUnload()
     {
+        ConduitNetworks.pause(this);
         ConduitNetworks.remove(this);
         super.onChunkUnload();
     }
@@ -192,6 +196,7 @@ public class TileEntityConduit extends TileEntity
         NBTTagList list = new NBTTagList();
         for (ConduitPort[] side : ports) for (ConduitPort port : side) list.appendTag(port.write(true));
         tag.setTag("Ports", list);
+        if (world != null) tag.setLong("TransportSavedAt", world.getTotalWorldTime());
         tag.setTag("Facade", facade.writeToNBT(new NBTTagCompound()));
         tag.setBoolean("TransparentFacade", transparentFacade);
         tag.setIntArray("InterfaceResources", interfaceResources.clone());
@@ -203,6 +208,7 @@ public class TileEntityConduit extends TileEntity
     {
         super.readFromNBT(tag);
         settingsRevision++;
+        transportSavedAt = tag.hasKey("TransportSavedAt") ? tag.getLong("TransportSavedAt") : -1;
         readInterfaceResources(tag);
         NBTTagList list = tag.getTagList("Ports", 10);
         for (int i = 0; i < Math.min(24, list.tagCount()); i++) ports[i / 4][i % 4].read(list.getCompoundTagAt(i), true);

@@ -1,0 +1,9 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "minersprosperity:logic_cable_dynamic"
+      }
+    }
+  ]
+}

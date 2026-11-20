@@ -24,6 +24,7 @@ public final class ModTileEntities
         if (ModConfig.MACHINES.enablePulverizer) register(TileEntityPulverizer.class, "pulverizer");
         if (ModConfig.MACHINES.enableCrystallizer) register(TileEntityCrystallizer.class, "crystallizer");
         if (ModConfig.MACHINES.enableGrinder) register(TileEntityGrinder.class, "grinder");
+        if (ModConfig.MACHINES.enableSeparator) register(TileEntitySeparator.class, "separator");
         if (ModConfig.MACHINES.enableMetalPress) register(TileEntityMetalPress.class, "metal_press");
         if (ModConfig.MACHINES.enableElectricFurnace) register(TileEntityElectricFurnace.class, "electric_furnace");
         if (ModConfig.MACHINES.enableSolidFuelGenerator) register(TileEntitySolidFuelGenerator.class, "solid_fuel_generator");

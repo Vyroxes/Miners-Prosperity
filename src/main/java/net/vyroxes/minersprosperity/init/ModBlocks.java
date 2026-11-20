@@ -43,6 +43,8 @@ public class ModBlocks {
                 blocks.add(REDSTONE_CONDUIT);
             else if (type == net.vyroxes.minersprosperity.transport.ConduitType.UNIVERSAL)
                 blocks.add(new BlockConduit(type.id, type, net.vyroxes.minersprosperity.transport.ConduitTier.SUPREME));
+            else if (!type.isTiered())
+                blocks.add(new BlockConduit(type.id, type, net.vyroxes.minersprosperity.transport.ConduitTier.BASIC));
             else for (net.vyroxes.minersprosperity.transport.ConduitTier tier : net.vyroxes.minersprosperity.transport.ConduitTier.values())
                 blocks.add(new BlockConduit(tier.name().toLowerCase(java.util.Locale.ROOT) + "_" + type.id, type, tier));
         }
@@ -127,6 +129,7 @@ public class ModBlocks {
     public static final Block PULVERIZER = new BlockMachinePulverizer("pulverizer");
     public static final Block CRYSTALLIZER = configurable(new BlockMachineCrystallizer("crystallizer"), () -> ModConfig.MACHINES.enableCrystallizer);
     public static final Block GRINDER = configurable(new BlockMachineGrinder("grinder"), () -> ModConfig.MACHINES.enableGrinder);
+    public static final Block SEPARATOR = configurable(new BlockMachineSeparator("separator"), () -> ModConfig.MACHINES.enableSeparator);
     public static final Block METAL_PRESS = new BlockMachineMetalPress("metal_press");
     public static final Block ELECTRIC_FURNACE = new BlockMachineElectricFurnace("electric_furnace");
 
@@ -239,6 +242,9 @@ public class ModBlocks {
     //FLUIDBLOCKS
     public static final BlockFluidClassic LIQUID_EXPERIENCE_BLOCK = createFluidBlock("liquid_experience", ModFluids.LIQUID_EXPERIENCE);
     public static final BlockFluidClassic CRUDE_OIL_BLOCK = createFluidBlock("crude_oil", ModFluids.CRUDE_OIL);
+    public static final BlockFluidClassic DISTILLED_WATER_BLOCK = createFluidBlock("distilled_water", ModFluids.DISTILLED_WATER);
+    public static final BlockFluidClassic FLOTATION_SOLUTION_BLOCK = createFluidBlock("flotation_solution", ModFluids.FLOTATION_SOLUTION);
+    public static final BlockFluidClassic SULFURIC_ACID_BLOCK = createFluidBlock("sulfuric_acid", ModFluids.SULFURIC_ACID);
 
     private static BlockFluidClassic createFluidBlock(String name, Fluid fluid)
     {

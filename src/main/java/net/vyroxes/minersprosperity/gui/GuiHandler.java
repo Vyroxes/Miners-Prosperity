@@ -38,7 +38,7 @@ public class GuiHandler implements IGuiHandler
         LIQUID_FUEL_GENERATOR,
         FLUID_TANK,
         ENERGY_STORAGE,
-        CONDUIT_DOWN, CONDUIT_UP, CONDUIT_NORTH, CONDUIT_SOUTH, CONDUIT_WEST, CONDUIT_EAST, PLACED_BACKPACK, ROCK_CRUSHER, STORAGE_CRATE, STORAGE_CRATE_CONTROLLER, WORKTABLE, TRASH_CAN;
+        CONDUIT_DOWN, CONDUIT_UP, CONDUIT_NORTH, CONDUIT_SOUTH, CONDUIT_WEST, CONDUIT_EAST, PLACED_BACKPACK, ROCK_CRUSHER, STORAGE_CRATE, STORAGE_CRATE_CONTROLLER, WORKTABLE, TRASH_CAN, SEPARATOR;
 
         public static GuiTypes fromId(int id)
         {
@@ -70,6 +70,7 @@ public class GuiHandler implements IGuiHandler
                 case MACHINE_CONFIGURATION, MACHINE_SLOT_CONFIGURATION, MACHINE_UPGRADES -> tile instanceof TileEntityMachine;
                 case ALLOY_FURNACE -> tile instanceof TileEntityAlloyFurnace;
                 case GRINDER -> tile instanceof TileEntityGrinder;
+            case SEPARATOR -> tile instanceof TileEntitySeparator;
                 case CRYSTALLIZER -> tile instanceof TileEntityCrystallizer;
                 case PULVERIZER -> tile instanceof TileEntityPulverizer;
                 case METAL_PRESS -> tile instanceof TileEntityMetalPress;
@@ -106,6 +107,7 @@ public class GuiHandler implements IGuiHandler
             case ROCK_CRUSHER -> new ContainerRockCrusher(player.inventory, (TileEntityMachine) Objects.requireNonNull(world.getTileEntity(pos)));
             case PULVERIZER -> new ContainerPulverizer(player.inventory, (TileEntityMachine) Objects.requireNonNull(world.getTileEntity(pos)));
             case CRYSTALLIZER -> new ContainerCrystallizer(player.inventory, (TileEntityMachine) Objects.requireNonNull(world.getTileEntity(pos)));
+            case SEPARATOR -> new ContainerSeparator(player.inventory, (TileEntitySeparator) Objects.requireNonNull(world.getTileEntity(pos)));
             case GRINDER -> new ContainerGrinder(player.inventory, (TileEntityMachine) Objects.requireNonNull(world.getTileEntity(pos)));
             case METAL_PRESS -> new ContainerMetalPress(player.inventory, (TileEntityMachine) Objects.requireNonNull(world.getTileEntity(pos)));
             case ELECTRIC_FURNACE -> new ContainerElectricFurnace(player.inventory, (TileEntityMachine) Objects.requireNonNull(world.getTileEntity(pos)));
@@ -148,6 +150,7 @@ public class GuiHandler implements IGuiHandler
                     new GuiPulverizer(player.inventory, (TileEntityMachine) Objects.requireNonNull(world.getTileEntity(pos)));
             case CRYSTALLIZER ->
                     new GuiCrystallizer(player.inventory, (TileEntityMachine) Objects.requireNonNull(world.getTileEntity(pos)));
+            case SEPARATOR -> new GuiSeparator(player.inventory, (TileEntitySeparator) Objects.requireNonNull(world.getTileEntity(pos)));
             case GRINDER ->
                     new GuiGrinder(player.inventory, (TileEntityMachine) Objects.requireNonNull(world.getTileEntity(pos)));
             case METAL_PRESS ->

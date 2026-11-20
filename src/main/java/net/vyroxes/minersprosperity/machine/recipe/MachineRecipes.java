@@ -12,6 +12,7 @@ public final class MachineRecipes {
         if (ModConfig.MACHINES.enablePulverizer) PulverizerRecipeLoader.loadFromJSON();
         if (ModConfig.MACHINES.enableCrystallizer) CrystallizerRecipeLoader.loadFromJSON();
         if (ModConfig.MACHINES.enableGrinder) GrinderRecipeLoader.loadFromJSON();
+        if (ModConfig.MACHINES.enableSeparator) SeparatorRecipeLoader.loadFromJSON();
         if (ModConfig.MACHINES.enableRockCrusher) RockCrusherRecipeLoader.loadFromJSON();
         if (ModConfig.MACHINES.enableMetalPress) MetalPressRecipeLoader.loadFromJSON();
         if (ModConfig.MACHINES.enableLiquidFuelGenerator) LiquidFuelGeneratorRecipeLoader.loadFromJSON();

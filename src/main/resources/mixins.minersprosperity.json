@@ -13,6 +13,7 @@
     "MixinContainerWorkbench",
     "MixinEntityLivingBase",
     "MixinEntityPlayerExtension",
+    "MixinFluidRegistry",
     "MixinItemBow",
     "MixinItemFishingRod",
     "MixinItemFlintAndSteel",

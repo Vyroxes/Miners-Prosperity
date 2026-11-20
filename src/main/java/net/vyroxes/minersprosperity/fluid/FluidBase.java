@@ -10,6 +10,7 @@ public class FluidBase extends Fluid
 {
     protected Material material = Material.WATER;
     protected float overlayAlpha = 1.0F;
+    private Integer particleColor;
 
     public FluidBase(String fluidName, ResourceLocation still, ResourceLocation flowing, ResourceLocation overlay)
     {
@@ -22,6 +23,17 @@ public class FluidBase extends Fluid
     public FluidBase setColor(int color)
     {
         super.setColor(color);
+        return this;
+    }
+
+    public int getParticleColor()
+    {
+        return this.particleColor != null ? this.particleColor : this.getColor();
+    }
+
+    public FluidBase setParticleColor(int color)
+    {
+        this.particleColor = color;
         return this;
     }
 

@@ -97,6 +97,7 @@ public class GuiConduit extends GuiContainer
         int column = 0;
         if (universal)
             addButton(new GuiButton(0, guiLeft + 8 + column++ * (buttonWidth + 2), guiTop + 21, buttonWidth, 20, text("resource." + resource)));
+        if (resource == ConduitType.LOGIC_RESOURCE) return;
         for (int tab = 0; tab < 3; tab++)
         {
             GuiButton button = addButton(new GuiButton(tab + 1, guiLeft + 8 + column++ * (buttonWidth + 2), guiTop + 21,
@@ -243,6 +244,12 @@ public class GuiConduit extends GuiContainer
 
     private void selectResource()
     {
+        if (resource == ConduitType.LOGIC_RESOURCE)
+        {
+            edited = null;
+            page = 0;
+            return;
+        }
         if (ports[resource] == null)
         {
             ports[resource] = new ConduitPort();
@@ -254,6 +261,7 @@ public class GuiConduit extends GuiContainer
 
     private void save()
     {
+        if (edited == null) return;
         collect();
         saveDelay = 0;
         edited.read(edited.write(false), false);
@@ -270,8 +278,8 @@ public class GuiConduit extends GuiContainer
         boolean reset = direction == 0;
         if (button.id == 0)
         {
-            if (reset) resource = tile.conduit().type.ordinal() % 4;
-            else do { resource = Math.floorMod(resource + direction, 4); } while (!tile.conduit().type.supports(resource));
+            if (reset) resource = 0;
+            else do { resource = Math.floorMod(resource + direction, ConduitType.RESOURCE_COUNT); } while (!tile.conduit().type.supports(resource));
             selectResource();
             if (page == 2 && resource != 1 && resource != 2) page = 0;
         }
@@ -361,7 +369,7 @@ public class GuiConduit extends GuiContainer
             filterEditor.updateScreen();
             return;
         }
-        if (revision != tile.settingsRevision)
+        if (edited != null && revision != tile.settingsRevision)
         {
             revision = tile.settingsRevision;
             NBTTagCompound settings = tile.ports[side][resource].write(false);
@@ -513,6 +521,8 @@ public class GuiConduit extends GuiContainer
                     (LIMIT_SETTINGS.length + LIMITS_PER_PAGE - 1) / LIMITS_PER_PAGE);
             fontRenderer.drawString(indicator, (xSize - fontRenderer.getStringWidth(indicator)) / 2, 48, 0x404040);
         }
+        if (resource == ConduitType.LOGIC_RESOURCE)
+            fontRenderer.drawSplitString(text("logic.info"), 8, 54, xSize - 16, 0x404040);
         fontRenderer.drawString(I18n.format("key.categories.inventory"), 44, 155, 0x404040);
     }
 

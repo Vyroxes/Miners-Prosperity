@@ -55,7 +55,8 @@ public class MessageConduitSettings implements IMessage
             EntityPlayerMP player = context.getServerHandler().player;
             player.getServerWorld().addScheduledTask(() -> {
                 if (!(player.openContainer instanceof ContainerConduit container) || container.windowId != message.window || !container.canInteractWith(player)) return;
-                if (container.tile.conduit() == null || !container.tile.conduit().type.supports(message.resource)) return;
+                if (container.tile.conduit() == null || message.resource >= container.tile.ports[container.side].length
+                        || !container.tile.conduit().type.supports(message.resource)) return;
                 ConduitPort port = container.tile.ports[container.side][message.resource];
                 if (message.filter >= 0 && message.filter < port.filters.length)
                 {

@@ -31,7 +31,7 @@ import net.vyroxes.minersprosperity.world.gen.WorldGeneration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = Tags.MODID, name = Tags.MODNAME, version = Tags.VERSION, acceptedMinecraftVersions = "[1.12.2]", guiFactory = Tags.MODGROUP + ".client.gui.ConfigGuiFactory")
+@Mod(modid = Tags.MODID, name = Tags.MODNAME, version = Tags.VERSION, acceptedMinecraftVersions = "[1.12.2]", dependencies = "before:nuclearcraft", guiFactory = Tags.MODGROUP + ".client.gui.ConfigGuiFactory")
 public class MinersProsperity
 {
     static

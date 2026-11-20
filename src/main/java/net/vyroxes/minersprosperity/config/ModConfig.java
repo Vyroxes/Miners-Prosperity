@@ -849,6 +849,18 @@ public class ModConfig
         @Config.RequiresMcRestart
         @RangeInt(min = 0)
         public int grinderMaxReceive = 200;
+
+        @Config.Name("Separator Energy Capacity")
+        @RangeInt(min = 1)
+        public int separatorEnergyCapacity = 20000;
+
+        @Config.Name("Separator Max Receive")
+        @RangeInt(min = 1)
+        public int separatorMaxReceive = 200;
+
+        @Config.Name("Separator Tank Capacity")
+        @RangeInt(min = 1)
+        public int separatorTankCapacity = 16000;
         @Config.Name("Metal Press Energy Capacity")
         @Comment("Base energy capacity in FE, before upgrades. Restart Minecraft after changing this value.")
         @Config.RequiresMcRestart
@@ -914,6 +926,9 @@ public class ModConfig
         public boolean enableAlloyFurnace = true;
         @Config.Name("Enable Grinder")
         public boolean enableGrinder = true;
+
+        @Config.Name("Enable Separator")
+        public boolean enableSeparator = true;
         @Config.Name("Enable Crystallizer")
         public boolean enableCrystallizer = true;
         @Config.Name("Enable Pulverizer")

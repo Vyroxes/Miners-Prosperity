@@ -31,7 +31,11 @@ public class ConduitTESR extends TileEntitySpecialRenderer<TileEntityConduit>
             {texture("universal_conduit_node_off"), texture("universal_conduit_node_active"), texture("universal_conduit_node_internal")},
             {texture("universal_conduit_arm_off"), texture("universal_conduit_arm_active")},
             {texture("universal_conduit_arm_short_off"), texture("universal_conduit_arm_short_active")}};
-    private static final int[] RESOURCE_COLORS = {0xC500FF, 0x00BEFF, 0xD4DC36, 0xFF0000};
+    private static final ResourceLocation[][] LOGIC_TEXTURES = {
+            {texture("logic_cable_node_off"), texture("logic_cable_node_off"), texture("logic_cable_node_internal")},
+            {texture("logic_cable_arm_off"), texture("logic_cable_arm_off")},
+            {texture("logic_cable_arm_short_off"), texture("logic_cable_arm_short_off")}};
+    private static final int[] RESOURCE_COLORS = {0xC500FF, 0x00BEFF, 0xD4DC36, 0xFF0000, ConduitType.LOGIC.color};
     private static final ResourceLocation[][][] ENERGY_TEXTURES = tierTextures(ConduitType.ENERGY);
     private static final ResourceLocation[][][] ITEM_TEXTURES = tierTextures(ConduitType.ITEM);
     private static final ResourceLocation[][][] FLUID_TEXTURES = tierTextures(ConduitType.FLUID);
@@ -141,33 +145,9 @@ public class ConduitTESR extends TileEntitySpecialRenderer<TileEntityConduit>
                 GlStateManager.enableBlend();
                 GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
             }
-            if (ModConfig.CONDUITS.animations) for (net.minecraft.nbt.NBTTagCompound event : tile.fluidTransits)
-            {
-                double progress = (tile.getWorld().getTotalWorldTime() + partial - event.getDouble("Start")) / Math.max(1, event.getDouble("Duration"));
-                if (progress < 0 || progress >= 1) continue;
-                Fluid fluid = FluidRegistry.getFluid(event.getString("Fluid"));
-                if (fluid == null) continue;
-                OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, fluid.getLuminosity() > 0 ? 240 : lightX, fluid.getLuminosity() > 0 ? 240 : lightY);
-                ResourceLocation texture = fluid.getFlowing() == null ? fluid.getStill() : fluid.getFlowing();
-                TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(texture.toString());
-                EnumFacing from = EnumFacing.byIndex(event.getInteger("From"));
-                EnumFacing to = EnumFacing.byIndex(event.getInteger("To"));
-                double a = Math.max(0, 0.5 - progress);
-                double b = Math.max(0, progress - 0.5);
-                double cx = 0.5 + from.getXOffset() * a + to.getXOffset() * b;
-                double cy = 0.5 + from.getYOffset() * a + to.getYOffset() * b;
-                double cz = 0.5 + from.getZOffset() * a + to.getZOffset() * b;
-                clipTransit(tile, cx, cy, cz);
-                try
-                {
-                    box(new AxisAlignedBB(Math.max(0.001, cx - 0.123), Math.max(0.001, cy - 0.123), Math.max(0.001, cz - 0.123),
-                            Math.min(0.999, cx + 0.123), Math.min(0.999, cy + 0.123), Math.min(0.999, cz + 0.123)), fluid.getColor(), 1, sprite);
-                }
-                finally
-                {
-                    for (int plane = 0; plane < 6; plane++) GL11.glDisable(GL11.GL_CLIP_PLANE0 + plane);
-                }
-            }
+            if (ModConfig.CONDUITS.animations
+                    && (tile.conduit().type == ConduitType.FLUID || tile.conduit().type == ConduitType.UNIVERSAL))
+                drawPipeFluid(tile, tile.getWorld().getTotalWorldTime() + partial, lightX, lightY);
         }
         if (glassPass)
         {
@@ -235,16 +215,18 @@ public class ConduitTESR extends TileEntitySpecialRenderer<TileEntityConduit>
         boolean item = tile.conduit().type == ConduitType.ITEM;
         boolean fluidPipe = tile.conduit().type == ConduitType.FLUID;
         boolean universal = tile.conduit().type == ConduitType.UNIVERSAL;
-        boolean textured = redstone || energy || item || fluidPipe || universal;
+        boolean logic = tile.conduit().type == ConduitType.LOGIC;
+        boolean textured = redstone || energy || item || fluidPipe || universal || logic;
         long now = tile.getWorld().getTotalWorldTime();
         int textureState = energy || fluidPipe ? (tile.resourceUntil[fluidPipe ? 2 : 0] > now ? 1 : 0) : redstoneTexture;
         if (universal) textureState = tile.isActive(now) ? 1 : 0;
+        if (logic) textureState = 0;
         if (item) textureState = transitActive(tile.itemTransits, now + partial) ? 1 : 0;
         if (fluidPipe) textureState = transitActive(tile.fluidTransits, now + partial) ? 1 : 0;
         if (universal && (transitActive(tile.itemTransits, now + partial) || transitActive(tile.fluidTransits, now + partial))) textureState = 1;
         ResourceLocation[][] tierTextures = energy ? ENERGY_TEXTURES[tile.conduit().tier.ordinal()]
                 : item ? ITEM_TEXTURES[tile.conduit().tier.ordinal()]
-                : fluidPipe ? FLUID_TEXTURES[tile.conduit().tier.ordinal()] : universal ? UNIVERSAL_TEXTURES : null;
+                : fluidPipe ? FLUID_TEXTURES[tile.conduit().tier.ordinal()] : universal ? UNIVERSAL_TEXTURES : logic ? LOGIC_TEXTURES : null;
         EnumFacing straight = textured ? tile.conduit().straightDirection(tile.getWorld(), tile.getPos()) : null;
         if (textured && straight == null)
         {
@@ -279,7 +261,7 @@ public class ConduitTESR extends TileEntitySpecialRenderer<TileEntityConduit>
             if (straight != null && side != straight) continue;
             boolean interfaceSide = !(tile.getWorld().getTileEntity(tile.getPos().offset(side)) instanceof TileEntityConduit);
             int resource = tile.getInterfaceResource(side.getIndex());
-            int mode = tile.ports[side.getIndex()][resource].mode;
+            int mode = resource == ConduitType.LOGIC_RESOURCE ? 0 : tile.ports[side.getIndex()][resource].mode;
             GlStateManager.pushMatrix();
             GlStateManager.translate(0.5, 0.5, 0.5);
             switch (side)
@@ -317,6 +299,97 @@ public class ConduitTESR extends TileEntitySpecialRenderer<TileEntityConduit>
                 if (universal) drawResourceMarker(RESOURCE_COLORS[resource]);
             }
             GlStateManager.popMatrix();
+        }
+    }
+
+    private void drawPipeFluid(TileEntityConduit tile, double now, float lightX, float lightY)
+    {
+        double latestStart = Double.NEGATIVE_INFINITY;
+        String fluidName = null;
+        for (net.minecraft.nbt.NBTTagCompound event : tile.fluidTransits)
+        {
+            double start = event.getDouble("Start");
+            if (now < start || now >= start + event.getDouble("Duration") + 20) continue;
+            if (start >= latestStart)
+            {
+                latestStart = start;
+                fluidName = event.getString("Fluid");
+            }
+        }
+        if (fluidName == null) return;
+        Fluid fluid = FluidRegistry.getFluid(fluidName);
+        if (fluid == null) return;
+        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, fluid.getLuminosity() > 0 ? 240 : lightX, fluid.getLuminosity() > 0 ? 240 : lightY);
+        ResourceLocation texture = fluid.getFlowing() == null ? fluid.getStill() : fluid.getFlowing();
+        TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(texture.toString());
+        int color = fluid.getColor();
+        double min = 0.377;
+        double max = 0.623;
+        double coreDepth = 0;
+        EnumFacing coreSide = EnumFacing.NORTH;
+        for (net.minecraft.nbt.NBTTagCompound event : tile.fluidTransits)
+        {
+            if (!fluidName.equals(event.getString("Fluid"))) continue;
+            double elapsed = now - event.getDouble("Start");
+            double duration = event.getDouble("Duration");
+            if (elapsed < 0 || elapsed >= duration + 20) continue;
+            double front = elapsed / duration;
+            double tail = (elapsed - 20) / duration;
+            if (front <= min || tail >= max) continue;
+            double depth = Math.min(max, front) - Math.max(min, tail);
+            if (depth <= coreDepth) continue;
+            coreDepth = depth;
+            coreSide = front < max ? EnumFacing.byIndex(event.getInteger("From")) : EnumFacing.byIndex(event.getInteger("To"));
+        }
+        for (EnumFacing side : EnumFacing.VALUES)
+        {
+            if (!tile.conduit().connects(tile.getWorld(), tile.getPos(), side)) continue;
+            double near = 1;
+            double far = 0;
+            for (net.minecraft.nbt.NBTTagCompound event : tile.fluidTransits)
+            {
+                if (!fluidName.equals(event.getString("Fluid"))) continue;
+                double start = event.getDouble("Start");
+                double duration = event.getDouble("Duration");
+                if (now < start || now >= start + duration + 20) continue;
+                double front = Math.min(1, (now - start) / duration);
+                double tail = Math.max(0, (now - start - 20) / duration);
+                if (side.getIndex() == event.getInteger("From") && tail < 0.5)
+                {
+                    near = Math.min(near, 0.5 - Math.min(0.5, front));
+                    far = Math.max(far, 0.5 - tail);
+                }
+                if (side.getIndex() == event.getInteger("To") && front > 0.5)
+                {
+                    near = Math.min(near, Math.max(0, tail - 0.5));
+                    far = Math.max(far, front - 0.5);
+                }
+            }
+            boolean interfaceSide = !(tile.getWorld().getTileEntity(tile.getPos().offset(side)) instanceof TileEntityConduit);
+            near = Math.max(near, max - 0.5);
+            far = Math.min(far, interfaceSide ? 15 / 16D - 0.501 : 0.5);
+            if (near >= far) continue;
+            boolean positive = side.getAxisDirection() == EnumFacing.AxisDirection.POSITIVE;
+            double low = positive ? 0.5 + near : 0.5 - far;
+            double high = positive ? 0.5 + far : 0.5 - near;
+            box(new AxisAlignedBB(side.getAxis() == EnumFacing.Axis.X ? low : min,
+                    side.getAxis() == EnumFacing.Axis.Y ? low : min,
+                    side.getAxis() == EnumFacing.Axis.Z ? low : min,
+                    side.getAxis() == EnumFacing.Axis.X ? high : max,
+                    side.getAxis() == EnumFacing.Axis.Y ? high : max,
+                    side.getAxis() == EnumFacing.Axis.Z ? high : max), color, 1, sprite);
+        }
+        if (coreDepth > 0)
+        {
+            boolean positive = coreSide.getAxisDirection() == EnumFacing.AxisDirection.POSITIVE;
+            double low = positive ? max - coreDepth : min;
+            double high = positive ? max : min + coreDepth;
+            box(new AxisAlignedBB(coreSide.getAxis() == EnumFacing.Axis.X ? low : min,
+                    coreSide.getAxis() == EnumFacing.Axis.Y ? low : min,
+                    coreSide.getAxis() == EnumFacing.Axis.Z ? low : min,
+                    coreSide.getAxis() == EnumFacing.Axis.X ? high : max,
+                    coreSide.getAxis() == EnumFacing.Axis.Y ? high : max,
+                    coreSide.getAxis() == EnumFacing.Axis.Z ? high : max), color, 1, sprite);
         }
     }
 

@@ -28,6 +28,9 @@ public final class ConduitTransit
     public int redirects;
     public long visualId = java.util.concurrent.ThreadLocalRandom.current().nextLong();
     public long retryAt;
+    public long pausedAt = -1;
+    public BlockPos blockedAt;
+    public boolean refreshVisuals;
     public ItemStack item = ItemStack.EMPTY;
     public FluidStack fluid;
 
@@ -39,6 +42,15 @@ public final class ConduitTransit
         this.arrival = arrival;
         this.retryAt = arrival;
         this.index = Math.max(0, route.length - 1);
+    }
+
+    public void shiftTime(long ticks)
+    {
+        if (ticks <= 0) return;
+        started += ticks;
+        arrival += ticks;
+        nextStepAt += ticks;
+        retryAt += ticks;
     }
 
     public NBTTagCompound write()
@@ -65,6 +77,11 @@ public final class ConduitTransit
             tag.setBoolean("Returning", returning);
             tag.setInteger("Redirects", redirects);
             tag.setLong("VisualId", visualId);
+            if (pausedAt >= 0 && blockedAt != null)
+            {
+                tag.setLong("PausedAt", pausedAt);
+                tag.setLong("BlockedAt", blockedAt.toLong());
+            }
         }
         if (!item.isEmpty()) tag.setTag("Item", item.writeToNBT(new NBTTagCompound()));
         if (fluid != null) tag.setTag("Fluid", fluid.writeToNBT(new NBTTagCompound()));
@@ -93,6 +110,11 @@ public final class ConduitTransit
             transit.returning = tag.getBoolean("Returning");
             transit.redirects = Math.max(0, tag.getInteger("Redirects"));
             transit.visualId = tag.getLong("VisualId");
+            if (tag.hasKey("PausedAt"))
+            {
+                transit.pausedAt = tag.getLong("PausedAt");
+                transit.blockedAt = BlockPos.fromLong(tag.getLong("BlockedAt"));
+            }
         }
         transit.item = new ItemStack(tag.getCompoundTag("Item"));
         transit.fluid = FluidStack.loadFluidStackFromNBT(tag.getCompoundTag("Fluid"));

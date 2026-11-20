@@ -73,6 +73,7 @@ public class ClientProxy extends CommonProxy
     {
         ClientRegistry.bindTileEntitySpecialRenderer(net.vyroxes.minersprosperity.tile.TileEntityCrystallizer.class, new net.vyroxes.minersprosperity.client.render.CrystallizerTESR());
         ClientRegistry.bindTileEntitySpecialRenderer(net.vyroxes.minersprosperity.tile.TileEntityGrinder.class, new net.vyroxes.minersprosperity.client.render.GrinderTESR());
+        ClientRegistry.bindTileEntitySpecialRenderer(net.vyroxes.minersprosperity.tile.TileEntitySeparator.class, new MachineProgressTESR<>(new ResourceLocation(Tags.MODID, "textures/blocks/separator_front_progress_bar.png"), 41, 4, 1, 10, 16));
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRockCrusher.class, new MachineProgressTESR<TileEntityRockCrusher>(new ResourceLocation(Tags.MODID, "textures/blocks/rock_crusher_front_progress_bar.png"), 41, 4, 4, 10, 10));
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAlloyFurnace.class, new MachineProgressTESR<TileEntityAlloyFurnace>(new ResourceLocation(Tags.MODID, "textures/blocks/alloy_furnace_front_progress_bar.png"), 41, 4, 4, 10, 1));
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPulverizer.class, new MachineProgressTESR<TileEntityPulverizer>(new ResourceLocation(Tags.MODID, "textures/blocks/pulverizer_front_progress_bar.png"), 41, 4, 4, 10, 10));

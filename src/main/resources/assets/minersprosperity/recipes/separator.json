@@ -1,0 +1,34 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "PBP",
+    "GFG",
+    "CMC"
+  ],
+  "key": {
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plateIron"
+    },
+    "B": {
+      "item": "minersprosperity:basic_circuit_board"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "gearIron"
+    },
+    "F": {
+      "item": "minersprosperity:basic_machine_frame"
+    },
+    "C": {
+      "item": "minecraft:bucket"
+    },
+    "M": {
+      "item": "minersprosperity:electric_motor"
+    }
+  },
+  "result": {
+    "item": "minersprosperity:separator",
+    "count": 1
+  }
+}

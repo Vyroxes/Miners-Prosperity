@@ -15,17 +15,24 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.world.*;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.vyroxes.minersprosperity.MinersProsperity;
+import net.vyroxes.minersprosperity.client.gui.FluidFormatter;
 import net.vyroxes.minersprosperity.gui.GuiHandler;
 import net.vyroxes.minersprosperity.init.ModItems;
 import net.vyroxes.minersprosperity.tile.TileEntityConduit;
 import net.vyroxes.minersprosperity.transport.*;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BlockConduit extends BlockBase
 {
@@ -66,8 +73,37 @@ public class BlockConduit extends BlockBase
             tooltip.add(net.minecraft.util.text.TextFormatting.AQUA + net.minecraft.client.resources.I18n.format("tooltip.conduit.rate." + resource)
                     + net.minecraft.util.text.TextFormatting.GRAY + ": " + value);
         }
+        if (type == ConduitType.UNIVERSAL)
+            tooltip.add(TextFormatting.AQUA + I18n.format("gui.conduit.resource." + ConduitType.LOGIC_RESOURCE));
         if (type == ConduitType.ITEM || type == ConduitType.FLUID || type == ConduitType.UNIVERSAL)
             tooltip.add(net.minecraft.util.text.TextFormatting.GRAY + net.minecraft.client.resources.I18n.format("tooltip.conduit.interval"));
+        NBTTagCompound data = stack.getSubCompound("BlockEntityTag");
+        if (type.supports(2) && data != null)
+        {
+            NBTTagList ports = data.getTagList("Ports", 10);
+            Map<String, Long> contents = new LinkedHashMap<>();
+            for (int i = 2; i < ports.tagCount(); i += 4)
+            {
+                NBTTagCompound port = ports.getCompoundTagAt(i);
+                addStoredFluid(contents, port.getCompoundTag("PendingFluid"));
+                for (net.minecraft.nbt.NBTBase entry : port.getTagList("Transits", 10))
+                    addStoredFluid(contents, ((NBTTagCompound) entry).getCompoundTag("Fluid"));
+            }
+            for (Map.Entry<String, Long> entry : contents.entrySet())
+            {
+                long amount = entry.getValue();
+                tooltip.add(TextFormatting.AQUA + I18n.format("gui.fluid") + TextFormatting.GRAY + ": " + entry.getKey());
+                tooltip.add(TextFormatting.AQUA + I18n.format("gui.fluid_stored") + TextFormatting.GRAY + ": "
+                        + FluidFormatter.amount(amount));
+            }
+        }
+    }
+
+    @net.minecraftforge.fml.relauncher.SideOnly(net.minecraftforge.fml.relauncher.Side.CLIENT)
+    private static void addStoredFluid(Map<String, Long> contents, NBTTagCompound data)
+    {
+        FluidStack fluid = FluidStack.loadFluidStackFromNBT(data);
+        if (fluid != null && fluid.amount > 0) contents.merge(fluid.getLocalizedName(), (long) fluid.amount, Long::sum);
     }
 
     @Override
@@ -120,7 +156,9 @@ public class BlockConduit extends BlockBase
         BlockPos target = pos.offset(side);
         if (world instanceof World level && !level.isBlockLoaded(target)) return false;
         Block block = world.getBlockState(target).getBlock();
-        if (block instanceof BlockConduit other) return other.type == type;
+        if (block instanceof BlockConduit other)
+            return other.type == type || type.supports(ConduitType.LOGIC_RESOURCE) && other.type.supports(ConduitType.LOGIC_RESOURCE);
+        if (type == ConduitType.LOGIC) return false;
         if (type.supports(3) && block != net.minecraft.init.Blocks.AIR) return true;
         TileEntity tile = world.getTileEntity(target);
         if (tile == null) return false;
@@ -293,6 +331,7 @@ public class BlockConduit extends BlockBase
             int selected = hit.subHit;
             if (held.getItem() == ModItems.WRENCH || player.isSneaking() && held.isEmpty())
             {
+                if (tile.getInterfaceResource(selected) == ConduitType.LOGIC_RESOURCE) return true;
                 tile.cycleInterfaceMode(selected);
                 world.playSound(null, pos, SoundEvents.UI_BUTTON_CLICK, SoundCategory.BLOCKS, 0.3F, 1);
                 return true;
@@ -338,7 +377,7 @@ public class BlockConduit extends BlockBase
     @Override
     public void breakBlock(@NotNull World world, @NotNull BlockPos pos, @NotNull IBlockState state)
     {
-        if (world.getTileEntity(pos) instanceof TileEntityConduit tile) ConduitNetworks.broken(tile);
+        if (world.getTileEntity(pos) instanceof TileEntityConduit tile) ConduitNetworks.broken(tile, type);
         super.breakBlock(world, pos, state);
     }
 
@@ -348,12 +387,30 @@ public class BlockConduit extends BlockBase
         ItemStack stack = new ItemStack(this);
         if (world.getTileEntity(pos) instanceof TileEntityConduit tile)
         {
-            NBTTagCompound root = new NBTTagCompound();
             NBTTagCompound data = tile.writeToNBT(new NBTTagCompound());
-            ConduitNetworks.prepareDrop(data, tile);
-            data.removeTag("x"); data.removeTag("y"); data.removeTag("z");
-            root.setTag("BlockEntityTag", data);
-            stack.setTagCompound(root);
+            ConduitNetworks.prepareDrop(data, tile, type);
+            if (!tile.facade.isEmpty()) drops.add(tile.facade.copy());
+            NBTTagList payloads = new NBTTagList();
+            boolean hasPayload = false;
+            for (net.minecraft.nbt.NBTBase entry : data.getTagList("Ports", 10))
+            {
+                NBTTagCompound port = (NBTTagCompound) entry;
+                NBTTagCompound payload = new NBTTagCompound();
+                if (!new ItemStack(port.getCompoundTag("PendingItem")).isEmpty())
+                    payload.setTag("PendingItem", port.getCompoundTag("PendingItem"));
+                if (port.hasKey("PendingFluid", 10)) payload.setTag("PendingFluid", port.getCompoundTag("PendingFluid"));
+                if (port.getInteger("PendingEnergy") > 0) payload.setInteger("PendingEnergy", port.getInteger("PendingEnergy"));
+                NBTTagList transits = port.getTagList("Transits", 10);
+                if (!transits.isEmpty()) payload.setTag("Transits", transits);
+                if (!payload.isEmpty()) hasPayload = true;
+                payloads.appendTag(payload);
+            }
+            if (hasPayload)
+            {
+                NBTTagCompound contents = new NBTTagCompound();
+                contents.setTag("Ports", payloads);
+                stack.setTagInfo("BlockEntityTag", contents);
+            }
         }
         drops.add(stack);
     }

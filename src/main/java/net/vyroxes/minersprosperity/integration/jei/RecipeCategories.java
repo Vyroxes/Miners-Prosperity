@@ -9,6 +9,7 @@ public class RecipeCategories
     public static final String PULVERIZER = Tags.MODID + ".pulverizer";
     public static final String CRYSTALLIZER = Tags.MODID + ".crystallizer";
     public static final String GRINDER = Tags.MODID + ".grinder";
+    public static final String SEPARATOR = Tags.MODID + ".separator";
     public static final String METAL_PRESS = Tags.MODID + ".metal_press";
     public static final String SOLID_FUEL_GENERATOR = Tags.MODID + ".solid_fuel_generator";
     public static final String LIQUID_FUEL_GENERATOR = Tags.MODID + ".liquid_fuel_generator";

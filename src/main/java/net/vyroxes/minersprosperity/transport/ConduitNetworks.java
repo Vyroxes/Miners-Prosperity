@@ -35,17 +35,24 @@ public final class ConduitNetworks
     public static void add(TileEntityConduit tile)
     {
         World world = tile.getWorld();
-        if (world.isRemote) return;
+        if (world.isRemote || tile.conduit() == null || tile.conduit().type == ConduitType.LOGIC) return;
         State state = WORLDS.computeIfAbsent(world, key -> new State());
         state.nodes.put(tile.getPos(), tile);
         for (ConduitPort[] ports : tile.ports) for (ConduitPort port : ports)
         {
             for (ConduitTransit transit : port.transits)
             {
+                if (transit.pausedAt < 0 && tile.transportSavedAt >= 0)
+                    transit.shiftTime(world.getTotalWorldTime() - tile.transportSavedAt);
+                transit.refreshVisuals = true;
                 boolean ownsPosition = false;
                 for (long position : transit.route) if (position == tile.getPos().toLong()) ownsPosition = true;
                 if (!ownsPosition && transit.origin != null)
                 {
+                    transit.origin = tile.getPos();
+                    transit.target = tile.getPos();
+                    transit.pausedAt = -1;
+                    transit.blockedAt = null;
                     transit.route = new long[]{tile.getPos().toLong()};
                     transit.durations = new int[]{1};
                     transit.index = 0;
@@ -56,6 +63,7 @@ public final class ConduitNetworks
             }
             if (!port.transits.isEmpty()) state.inFlight.add(tile);
         }
+        tile.transportSavedAt = -1;
         invalidate(world, tile.getPos());
         for (EnumFacing side : EnumFacing.VALUES) invalidate(world, tile.getPos().offset(side));
     }
@@ -611,6 +619,9 @@ public final class ConduitNetworks
         transit.durations = new int[path.size()];
         transit.index = path.size() - 1;
         transit.recovering = false;
+        transit.pausedAt = -1;
+        transit.blockedAt = null;
+        transit.refreshVisuals = false;
         long arrival = transit.started;
         int budget = ModConfig.CONDUITS.animationNodesPerTransfer;
         if (budget < 0) budget = path.size();
@@ -649,6 +660,7 @@ public final class ConduitNetworks
             TileEntityConduit source = sources.next();
             if (source.isInvalid() || !world.isBlockLoaded(source.getPos()))
             {
+                if (!source.isInvalid()) pause(source);
                 sources.remove();
                 continue;
             }
@@ -661,7 +673,8 @@ public final class ConduitNetworks
                 {
                     ConduitTransit transit = transits.next();
                     initializeTransit(world, source, side, port, transit);
-                    if (now < transit.retryAt) continue;
+                    if (transit.pausedAt < 0 && !transit.refreshVisuals && now < transit.retryAt) continue;
+                    if (transit.pausedAt >= 0 && now < transit.retryAt) continue;
                     state.workBudget--;
                     deliveryBudget--;
                     transit.retryAt = now + 20;
@@ -764,8 +777,26 @@ public final class ConduitNetworks
             transit.recovering = true;
             return false;
         }
+        if (transit.pausedAt >= 0)
+        {
+            if (transit.blockedAt != null && !world.isBlockLoaded(transit.blockedAt)) return false;
+            transit.shiftTime(now - transit.pausedAt);
+            transit.retryAt = now + 20;
+            transit.pausedAt = -1;
+            transit.blockedAt = null;
+            transit.refreshVisuals = true;
+        }
+        if (transit.refreshVisuals)
+        {
+            refreshVisuals(world, state, transit, resource);
+            transit.refreshVisuals = false;
+        }
         BlockPos current = BlockPos.fromLong(transit.route[transit.index]);
-        if (!world.isBlockLoaded(current)) return false;
+        if (!world.isBlockLoaded(current))
+        {
+            pause(world, state, transit, current, Math.min(now, transit.nextStepAt));
+            return false;
+        }
         if (!(world.getTileEntity(current) instanceof TileEntityConduit))
         {
             cancelVisuals(world, state, transit);
@@ -789,7 +820,11 @@ public final class ConduitNetworks
         while (now >= transit.nextStepAt && transit.index > 0)
         {
             BlockPos next = BlockPos.fromLong(transit.route[transit.index - 1]);
-            if (!world.isBlockLoaded(next)) return false;
+            if (!world.isBlockLoaded(next))
+            {
+                pause(world, state, transit, next, transit.nextStepAt);
+                return false;
+            }
             TileEntity nextTile = world.getTileEntity(next);
             TileEntityConduit currentTile = (TileEntityConduit) world.getTileEntity(current);
             EnumFacing exit = direction(current, next);
@@ -815,12 +850,69 @@ public final class ConduitNetworks
             return false;
         }
         transit.exitSide = transit.side;
-        if (!world.isBlockLoaded(transit.target.offset(transit.side))) return false;
+        if (!world.isBlockLoaded(transit.target.offset(transit.side)))
+        {
+            pause(world, state, transit, transit.target.offset(transit.side), Math.min(now, transit.nextStepAt));
+            return false;
+        }
         if (receiver(world, new Endpoint((TileEntityConduit) world.getTileEntity(current), transit.side), transit, resource, transit.returning, false)) return true;
-        cancelVisuals(world, state, transit);
+        // The fluid front has arrived. Let its visible tail clear from source to destination.
+        if (resource != 2) cancelVisuals(world, state, transit);
         transit.recovering = true;
         recover(world, state, transit, resource, current);
         return false;
+    }
+
+    private static void pause(World world, State state, ConduitTransit transit, BlockPos blocked, long at)
+    {
+        if (transit.pausedAt < 0)
+        {
+            transit.pausedAt = at;
+            transit.blockedAt = blocked;
+            cancelVisuals(world, state, transit);
+        }
+        transit.retryAt = world.getTotalWorldTime() + 20;
+    }
+
+    public static void pause(TileEntityConduit owner)
+    {
+        World world = owner.getWorld();
+        if (world == null || world.isRemote) return;
+        State state = WORLDS.get(world);
+        if (state == null) return;
+        for (EnumFacing side : EnumFacing.VALUES) for (int resource = 1; resource <= 2; resource++)
+        {
+            ConduitPort port = owner.ports[side.getIndex()][resource];
+            for (ConduitTransit transit : port.transits)
+            {
+                initializeTransit(world, owner, side, port, transit);
+                pause(world, state, transit, owner.getPos(), world.getTotalWorldTime());
+            }
+        }
+        owner.markDirty();
+    }
+
+    private static void refreshVisuals(World world, State state, ConduitTransit transit, int resource)
+    {
+        cancelVisuals(world, state, transit);
+        if (!ModConfig.CONDUITS.animations || transit.recovering || transit.durations.length != transit.route.length) return;
+        int budget = ModConfig.CONDUITS.animationNodesPerTransfer;
+        if (budget < 0) budget = transit.index + 1;
+        long start = transit.nextStepAt - transit.durations[transit.index];
+        for (int i = transit.index; i >= 0 && budget-- > 0; i--)
+        {
+            BlockPos pos = BlockPos.fromLong(transit.route[i]);
+            int duration = transit.durations[i];
+            if (world.isBlockLoaded(pos) && world.getTileEntity(pos) instanceof TileEntityConduit tile)
+            {
+                EnumFacing from = i == transit.index ? transit.entrySide : direction(pos, BlockPos.fromLong(transit.route[i + 1]));
+                EnumFacing to = i > 0 ? direction(pos, BlockPos.fromLong(transit.route[i - 1])) : transit.side;
+                if (resource == 1) tile.recordItemTransit(transit.item, start, duration, from.getIndex(), to.getIndex(), transit.visualId);
+                else tile.recordFluidTransit(transit.fluid, start, duration, from.getIndex(), to.getIndex(), transit.visualId);
+                state.itemVisuals.add(tile);
+            }
+            start += duration;
+        }
     }
 
     private static boolean receiver(World world, Endpoint endpoint, ConduitTransit transit, int resource, boolean returning, boolean requireSpace)
@@ -844,7 +936,12 @@ public final class ConduitNetworks
 
     private static void recover(World world, State state, ConduitTransit transit, int resource, BlockPos current)
     {
-        if (!world.isBlockLoaded(transit.target.offset(transit.side))) return;
+        if (!world.isBlockLoaded(transit.target.offset(transit.side)) || !world.isBlockLoaded(transit.origin))
+        {
+            BlockPos blocked = !world.isBlockLoaded(transit.origin) ? transit.origin : transit.target.offset(transit.side);
+            pause(world, state, transit, blocked, world.getTotalWorldTime());
+            return;
+        }
         Network network = state.membership.get(current);
         if (network == null) return;
         Route route = network.routes.get(current);
@@ -940,11 +1037,12 @@ public final class ConduitNetworks
         if (transit.route.length == 0) return null;
         int index = Math.min(transit.index, transit.route.length - 1);
         long next = transit.nextStepAt;
-        if (!transit.recovering && transit.durations.length == transit.route.length)
+        if (!transit.recovering && transit.pausedAt < 0 && transit.durations.length == transit.route.length)
             while (index > 0 && world.getTotalWorldTime() >= next) next += transit.durations[--index];
-        for (int distance = 0; distance < transit.route.length; distance++) for (int direction = 1; direction >= -1; direction -= 2)
+        // Ownership can move only to the current pipe or its immediate route neighbors, never across a gap.
+        for (int offset = 0; offset < 3; offset++)
         {
-            int candidate = index + distance * direction;
+            int candidate = index + (offset == 1 ? 1 : offset == 2 ? -1 : 0);
             if (candidate < 0 || candidate >= transit.route.length) continue;
             BlockPos pos = BlockPos.fromLong(transit.route[candidate]);
             if (world.isBlockLoaded(pos) && world.getTileEntity(pos) instanceof TileEntityConduit tile && tile != excluded) return tile;
@@ -952,7 +1050,20 @@ public final class ConduitNetworks
         return null;
     }
 
-    public static void prepareDrop(NBTTagCompound data, TileEntityConduit owner)
+    private static TileEntityConduit dropCarrier(World world, ConduitTransit transit, TileEntityConduit owner, ConduitType type)
+    {
+        TileEntityConduit carrier = carrier(world, transit, owner);
+        if (carrier != null || transit.fluid == null) return carrier;
+        for (EnumFacing side : EnumFacing.VALUES)
+        {
+            BlockPos adjacent = owner.getPos().offset(side);
+            if (world.isBlockLoaded(adjacent) && world.getTileEntity(adjacent) instanceof TileEntityConduit tile
+                    && !tile.isInvalid() && tile.conduit() != null && tile.conduit().type == type) return tile;
+        }
+        return null;
+    }
+
+    public static void prepareDrop(NBTTagCompound data, TileEntityConduit owner, ConduitType type)
     {
         World world = owner.getWorld();
         if (world.isRemote) return;
@@ -962,13 +1073,19 @@ public final class ConduitNetworks
             NBTTagList retained = new NBTTagList();
             for (ConduitTransit transit : owner.ports[side.getIndex()][resource].transits)
             {
-                if (transit.fluid != null && carrier(world, transit, owner) == null) retained.appendTag(transit.write());
+                if (transit.fluid == null || dropCarrier(world, transit, owner, type) != null) continue;
+                NBTTagCompound payload = transit.write();
+                payload.setTag("Route", new NBTTagList());
+                payload.setInteger("Channel", 0);
+                payload.removeTag("Returning");
+                payload.removeTag("Redirects");
+                retained.appendTag(payload);
             }
             ports.getCompoundTagAt(side.getIndex() * 4 + resource).setTag("Transits", retained);
         }
     }
 
-    public static void broken(TileEntityConduit owner)
+    public static void broken(TileEntityConduit owner, ConduitType type)
     {
         World world = owner.getWorld();
         if (world.isRemote) return;
@@ -981,7 +1098,7 @@ public final class ConduitNetworks
             {
                 ConduitTransit transit = transits.next();
                 initializeTransit(world, owner, side, port, transit);
-                TileEntityConduit carrier = carrier(world, transit, owner);
+                TileEntityConduit carrier = dropCarrier(world, transit, owner, type);
                 if (carrier == null)
                 {
                     dropItem(world, owner.getPos(), transit);

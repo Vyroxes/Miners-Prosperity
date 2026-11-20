@@ -13,6 +13,7 @@ import net.vyroxes.minersprosperity.machine.recipe.MetalPressRecipe;
 import net.vyroxes.minersprosperity.machine.recipe.PulverizerRecipe;
 import net.vyroxes.minersprosperity.machine.recipe.CrystallizerRecipe;
 import net.vyroxes.minersprosperity.machine.recipe.GrinderRecipe;
+import net.vyroxes.minersprosperity.machine.recipe.SeparatorRecipe;
 import net.vyroxes.minersprosperity.machine.upgrade.MachineUpgradeType;
 import net.vyroxes.minersprosperity.tile.*;
 import org.jetbrains.annotations.NotNull;
@@ -128,6 +129,7 @@ public class CustomItemStackHandler extends ItemStackHandler
             else if (tile instanceof TileEntityRockCrusher) return net.vyroxes.minersprosperity.machine.recipe.RockCrusherRecipe.getInstance().findRecipe(stack) != null;
             else if (tile instanceof TileEntityPulverizer) return PulverizerRecipe.getInstance().getLookupTable().isInputValid(stack);
             else if (tile instanceof TileEntityCrystallizer) return CrystallizerRecipe.getInstance().getLookupTable().isInputValid(stack);
+            else if (tile instanceof TileEntitySeparator) return slot == 0 ? SeparatorRecipe.isInputValid(stack) : TileEntitySeparator.isFluidContainer(stack);
             else if (tile instanceof TileEntityGrinder) return GrinderRecipe.getInstance().getLookupTable().isInputValid(stack);
             else if (tile instanceof TileEntityMetalPress) return MetalPressRecipe.getInstance().getLookupTable().isItemValid(this, slot, stack);
             else if (tile instanceof TileEntityElectricFurnace) return !FurnaceRecipes.instance().getSmeltingResult(stack).isEmpty();

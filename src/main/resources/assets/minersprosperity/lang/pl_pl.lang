@@ -62,11 +62,13 @@ tile.trash_can.name=Kosz na śmieci
 #MACHINES
 tile.crystallizer.name=Krystalizator
 tile.grinder.name=Młynek
+tile.separator.name=Separator
 tile.rock_crusher.name=Kruszarka skał
 tile.solid_fuel_generator.name=Generator na paliwo stałe
 
 #CONDUITS
 tile.redstone_conduit.name=Przewód redstone
+tile.logic_cable.name=Przewód logiczny
 
 #STORAGE CRATES
 tile.basic_storage_crate.name=Basic — skrzynia magazynowa (1)
@@ -102,6 +104,7 @@ tile.storage_crate_controller.name=Kontroler skrzyń magazynowych
 #CONTAINERS
 container.crystallizer=Krystalizator
 container.grinder=Młynek
+container.separator=Separator
 container.rock_crusher=Kruszarka skał
 container.trash_can=Kosz na śmieci
 container.solid_fuel_generator=Generator na paliwo stałe
@@ -252,6 +255,9 @@ gui.crate.unlocked=Przypisanie odblokowane
 gui.conduit.interface.selected=Wybrane medium: %s
 gui.conduit.interface.scroll=§fShift + kółko w dół / w górę:§7 wybierz następne / poprzednie medium.
 gui.conduit.interface.mode=§fPPM:§7 zmień tryb kluczem.\n§fShift + PPM:§7 zmień tryb pustą ręką.
+gui.conduit.resource.4=Logika
+gui.conduit.logic.info=Łączy terminale, magazyny i urządzenia autocraftingu z siecią logiczną.
+gui.conduit.probe.type.6=Logika
 gui.conduit.limits_page=%s / %s
 gui.conduit.help.limits_page=Przełącza strony limitów. Wartości są zapisywane przed przejściem na inną stronę.
 gui.conduit.slot_preview_empty=Brak slotów przedmiotów dostępnych z tej strony.
@@ -364,7 +370,8 @@ tooltip.conduit.energy_conduit=Przesyła energię między maszynami i magazynami
 tooltip.conduit.item_duct=Przesyła przedmioty między ekwipunkami.
 tooltip.conduit.fluid_pipe=Przesyła płyny między maszynami i zbiornikami.
 tooltip.conduit.redstone_conduit=Przesyła sygnały redstone z użyciem konfigurowalnych kanałów.
-tooltip.conduit.universal_conduit=Przesyła energię, przedmioty, płyny i sygnały redstone.
+tooltip.conduit.universal_conduit=Przesyła energię, przedmioty, płyny i sygnały redstone oraz obsługuje połączenia logiczne.
+tooltip.conduit.logic_cable=Łączy urządzenia z siecią logiczną.
 tooltip.conduit.rate.0=Przesył energii
 tooltip.conduit.rate.1=Przesył przedmiotów
 tooltip.conduit.rate.2=Przesył płynów
@@ -383,3 +390,10 @@ chat.minersprosperity.recipes.updated=[Miner's Prosperity] %s: zaktualizowano re
 message.backpack.full=Twój plecak jest pełny!
 message.item_search.limit=Osiągnięto limit wyszukiwania; część magazynów mogła nie zostać sprawdzona.
 message.item_search.results=%s: znaleziono w %s magazynach w promieniu %s bloków. Pasujące magazyny zostały oznaczone.
+fluid.distilled_water=Woda destylowana
+fluid.flotation_solution=Roztwór flotacyjny
+fluid.sulfuric_acid=Kwas siarkowy
+tile.distilled_water.name=Woda destylowana
+tile.flotation_solution.name=Roztwór flotacyjny
+tile.sulfuric_acid.name=Kwas siarkowy
+gui.separator.fluid_container=Napełnij lub opróżnij pojemnik na płyn
